@@ -11,7 +11,7 @@ class PatronController {
 	
 	def init() {
 		try {
-			def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), firstName: 'Test', lastName: 'Testing', email: 'test@test.com', zNumber: 'z12345678')
+			def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), name: 'Test', email: 'test@test.com', zNumber: 'z12345678')
 			p.save(flush:true, failOnError:true)	
 			
 			def person = Person.get(1)
@@ -19,7 +19,7 @@ class PatronController {
 			log.info "Count of Person Table: " + p
 		} catch (Exception e) {
 			e.printStackTrace();
-			return ERROR;
+			return
 		}
 		
 	}
@@ -44,8 +44,8 @@ class PatronController {
 			on("save") {
 				log.info "Saving Patron Information to Database"
 				
-				log.info "value: " + params.firstName
-				def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), firstName: params.firstName, lastName: '', email: '', zNumber: '')
+				log.info "value: " + params.name
+				def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), name: params.name, email: '', zNumber: '')
 				p.save(flush:true, failOnError:true)
 				
 				def list = Person.list()

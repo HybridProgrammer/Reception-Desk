@@ -1,5 +1,5 @@
 <g:form>
-	<g:textField name="firstName" value="${myValue}" />
+	<label>Name: </label><g:textField name="name" value="${myValue}" /></label>
     <g:submitButton name="save" value="Save" />
     <g:submitButton name="cancel" value="Cancel" />
 </g:form>

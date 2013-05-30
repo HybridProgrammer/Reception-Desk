@@ -7,7 +7,7 @@ class PersonController {
 		
 		render {
 			for (p in people) {
-			   div(id: p.id, p.firstName)
+			   div(id: p.id, p.name)
 			}
 		 }
 	}

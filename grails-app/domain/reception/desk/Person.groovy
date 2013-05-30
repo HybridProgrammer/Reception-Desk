@@ -5,8 +5,7 @@ import java.io.Serializable;
 class Person implements Serializable {
 
     static constraints = {
-		firstName nullable: true
-		lastName nullable: true
+		name nullable: true
 		zNumber nullable: true
 		email nullable: true
 		student nullable: true
@@ -14,8 +13,7 @@ class Person implements Serializable {
 	
 	Student student
 	
-	String firstName
-	String lastName 
+	String name
 	String zNumber
 	String email 
 }
