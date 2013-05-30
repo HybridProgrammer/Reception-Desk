@@ -1,9 +1,27 @@
 package reception.desk
 
+import javax.persistence.OneToMany;
+
 class PatronController {
 
     def index() {
+		init()
 		redirect(action: "guest")
+	}
+	
+	def init() {
+		try {
+			def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), firstName: 'Test', lastName: 'Testing', email: 'test@test.com', zNumber: 'z12345678')
+			p.save(flush:true, failOnError:true)	
+			
+			def person = Person.get(1)
+			//println person.
+			log.info "Count of Person Table: " + p
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ERROR;
+		}
+		
 	}
 	
 	def guestFlow = {
@@ -19,12 +37,37 @@ class PatronController {
 			on("scolarships").to "enterWaitQueue"			//Scholarships
 			on("programs").to "enterWaitQueue"				//Dual Enrollment/Summer Programs
 			on("other").to "enterWaitQueue"					//Other
+			on("viewPersons").to"displayPersons"
 		}
 		
 		getPatronInformation {
-			on("save").to "enterWaitQueue"
+			on("save") {
+				log.info "Saving Patron Information to Database"
+				
+				log.info "value: " + params.firstName
+				def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), firstName: params.firstName, lastName: '', email: '', zNumber: '')
+				p.save(flush:true, failOnError:true)
+				
+				def list = Person.list()
+				log.info "Count of Person Table: " + list
+				//!flow.person.validate() ? error() : success()
+			}.to "enterWaitQueue"
 			on("cancel").to "askPurpose"
 		}
-		enterWaitQueue {}
+//		savePatronInformation {
+//			action {
+//				log.info "Saving Patron Information to Database"
+//			}
+//			on("success").to "enterWaitQueue"
+//		}
+		enterWaitQueue {
+			action {
+				log.info "Entering Wait Queue"	
+			}
+			on("success").to "askPurpose"
+		}
+		displayPersons {
+			redirect(controller: "Person", action: "index")
+		}
 	}
 }
