@@ -7,6 +7,7 @@ class Student implements Serializable {
     static constraints = {
 		cellNumber nullable: true
 		cellProvider nullable: true
+		nCredits nullable: true
     }
 	
 	static belongsTo = [person:Person]
@@ -17,5 +18,6 @@ class Student implements Serializable {
 	
 	String cellNumber
 	String cellProvider
+	String nCredits
 	
 }

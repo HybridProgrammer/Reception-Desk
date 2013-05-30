@@ -11,6 +11,11 @@ class PatronController {
 	
 	def init() {
 		try {
+			//Database Data
+			def m = new Major(displayName: 'Civil Engineering', shortName: 'CIV', department: 'CEGE').save()
+			m = new Major(displayName: 'Geomatics Engineering', shortName: 'GEO', department: 'CEGE').save()
+			
+			//Test Data
 			def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), name: 'Test', email: 'test@test.com', zNumber: 'z12345678')
 			p.save(flush:true, failOnError:true)	
 			
