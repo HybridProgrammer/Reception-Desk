@@ -10,10 +10,23 @@ class PatronController {
 	}
 	
 	def init() {
+		//Init can only be called once
+		Stats statInit = Stats.find { name == 'init' }
+		if(statInit != null) {
+			log.info "init has already executed. Nothing to do."
+			return
+		}
+		
+		def stat = new Stats(name: 'init', value: 1)
+		stat.save()
 		try {
 			//Database Data
-			def m = new Major(displayName: 'Civil Engineering', shortName: 'CIV', department: 'CEGE').save()
-			m = new Major(displayName: 'Geomatics Engineering', shortName: 'GEO', department: 'CEGE').save()
+			//Check that Major table is empty
+			log.info "Number of Majors: " + Major.count()
+			if(Major.count() == 0) {
+				def m = new Major(displayName: 'Civil Engineering', shortName: 'CIV', department: 'CEGE').save()
+				m = new Major(displayName: 'Geomatics Engineering', shortName: 'GEO', department: 'CEGE').save()
+			}
 			
 			//Test Data
 			def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), name: 'Test', email: 'test@test.com', zNumber: 'z12345678')
@@ -31,7 +44,9 @@ class PatronController {
 	
 	def guestFlow = {
 		askPurpose {
-			on("advising").to "getPatronInformation"		//Advising for semester classes
+			on("advising"){
+				[major: Major.list()]
+			}.to "getPatronInformation"		//Advising for semester classes
 			on("permNHolds").to "enterWaitQueue"			//Permission/Holds Removed
 			on("changeMajor").to "enterWaitQueue"			//Change of Major
 			on("graduation").to "enterWaitQueue"			//Graduation Applications/Issues
