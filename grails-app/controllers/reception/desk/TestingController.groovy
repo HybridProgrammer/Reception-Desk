@@ -1,7 +1,7 @@
 package reception.desk
 
 class TestingController {
-
+	
     def index() {
 		redirect(action: "showPersons")
 	}
@@ -24,5 +24,14 @@ class TestingController {
 			   div(id: m.id, m.displayName)
 			}
 		 }
+	}
+	
+	def login() {
+		
+	}
+	
+	def secure = {
+		render "Secure access only"
+		
 	}
 }
