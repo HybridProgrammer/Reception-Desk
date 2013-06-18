@@ -1,5 +1,8 @@
 package reception.desk
 
+import grails.plugins.springsecurity.Secured;
+import grails.plugins.springsecurity.SecurityConfigType
+
 class TestingController {
 	
     def index() {
@@ -30,6 +33,7 @@ class TestingController {
 		
 	}
 	
+	@Secured(['IS_AUTHENTICATED_FULLY'])
 	def secure = {
 		render "Secure access only"
 		
