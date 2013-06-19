@@ -48,6 +48,9 @@ class BootStrap {
 			def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), name: 'Test', email: 'test@test.com', zNumber: 'z12345678')
 			p.save(flush:true, failOnError:true)
 			
+			p = new Person(student:null, name:'admin', email: 'admin@admin.com', zNumber:'z12345678')
+			p.save(flush:true, failOnError:true)
+			
 			def person = Person.get(1)
 			//println person.
 			log.info "Count of Person Table: " + p
