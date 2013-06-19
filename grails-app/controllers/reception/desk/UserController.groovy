@@ -90,6 +90,8 @@ class UserController {
         }
 
         try {
+			Collection<UserRole> userRoles = UserRole.findAllByUser(userInstance)
+			userRoles*.delete(flush: true);
             userInstance.delete(flush: true)
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "list")
