@@ -53,6 +53,12 @@ class PatronController {
 				def list = Person.list()
 				log.info "Count of Person Table: " + list
 				
+				//Add user to wait queue
+				def queueInstance = new Queue(isInLine: true, person: personInstance)
+				if (!queueInstance.save(flush: true)) {
+					//render(view: "create", model: [personInstance: personInstance])
+					return
+				}
 			}.to "enterWaitQueue"
 			on("cancel").to "askPurpose"
 		}
