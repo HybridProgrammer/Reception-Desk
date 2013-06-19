@@ -66,6 +66,23 @@
 					
 				</li>
 				</g:else>
+				
+				<g:if test="${personInstance?.majorId}">
+				<li class="fieldcontain">
+					<span id="majorId-label" class="property-label"><g:message code="person.majorId" default="major" /></span>
+					
+						<span class="property-value" aria-labelledby="majorId-label"><g:fieldValue bean="${major}" field="displayName"/></span>
+					
+				</li>
+				</g:if>
+				<g:else>
+				<li class="fieldcontain">
+					<span id="majorId-label" class="property-label">major</span>
+					
+						<span class="property-value" aria-labelledby="major-label"></span>
+					
+				</li>
+				</g:else>
 			
 				
 			

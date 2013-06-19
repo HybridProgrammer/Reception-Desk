@@ -1,4 +1,5 @@
 <%@ page import="reception.desk.Person" %>
+<%@ page import="reception.desk.Major" %>
 
 
 
@@ -32,6 +33,19 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textField name="room" required="" value="${personInstance?.room}"/>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'majorId', 'error')} ">
+	<label for="majorId">
+		<g:message code="person.majorId.label" default="major" />
+	</label>
+	<g:select name="majorId"
+          from="${major.toList()}"
+          value="${personInstance?.majorId}"
+          optionKey="id"
+          optionValue="displayName"
+          noSelection="['':'-Choose Your Major']"
+           />
 </div>
 
 

@@ -37,13 +37,22 @@ class PatronController {
 			on("save") {
 				log.info "Saving Patron Information to Database"
 				
-				log.info "value: " + params.name
-				def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), name: params.name, email: '', zNumber: '')
-				p.save(flush:true, failOnError:true)
+				log.info "value: " + params
+				//def p = new Person(student:new Student(cellNumber: '', cellProvider: ''), name: params.name, email: '', zNumber: '')
+				//p.save(flush:true, failOnError:true)
+				
+				def personInstance = new Person(params)
+				if (!personInstance.save(flush: true)) {
+					//render(view: "create", model: [personInstance: personInstance])
+					return
+				}
+		
+				flash.message = message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
+				//redirect(action: "show", id: personInstance.id)
 				
 				def list = Person.list()
 				log.info "Count of Person Table: " + list
-				//!flow.person.validate() ? error() : success()
+				
 			}.to "enterWaitQueue"
 			on("cancel").to "askPurpose"
 		}

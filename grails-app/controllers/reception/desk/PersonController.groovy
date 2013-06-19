@@ -23,7 +23,7 @@ class PersonController {
 			return
 		}
 
-		[personInstance: personInstance]
+		[personInstance: personInstance, major: Major.list()]
 	}
 	
 	def update(Long id, Long version) {
@@ -74,6 +74,6 @@ class PersonController {
 			return
 		}
 
-		[personInstance: personInstance]
+		[personInstance: personInstance, major: Major.get(personInstance.majorId)]
 	}
 }

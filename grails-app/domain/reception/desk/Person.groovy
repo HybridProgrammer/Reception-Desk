@@ -10,6 +10,7 @@ class Person implements Serializable {
 		email nullable: true
 		student nullable: true
 		room nullable: true
+		majorId nullable: true
     }
 	
 	Student student
@@ -17,5 +18,6 @@ class Person implements Serializable {
 	String name
 	String zNumber
 	String email
-	String room 
+	String room
+	Long majorId
 }
