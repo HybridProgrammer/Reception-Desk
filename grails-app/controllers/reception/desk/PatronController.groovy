@@ -7,16 +7,29 @@ class PatronController {
 	
 
     def index() {
-		init()
-		redirect(action: "guest")
+		redirect(action: "showMenu")
 	}
 	
-	def init() {
-				
+	def showMenu(Integer max) {
+		params.max = Math.min(max ?: 25, 100)
+		[functionInstanceList: Function.list(params), functionInstanceTotal: Function.count()]
 	}
 	
 	def guestFlow = {
 		askPurpose {
+			action {
+				log.info "params: " + params
+				log.info "flow: " + flow
+				log.info "flash: " + flash
+				log.info "session: " + session
+				
+				if(params.button != null) {
+					def f = Function.findByDescription(params.button)
+					flow.purpose = f
+					"${f.name}"()
+				}
+			}
+			on("success").to "displayMenu"	
 			on("advising"){
 				[major: Major.list()]
 			}.to "getPatronInformation"		//Advising for semester classes
@@ -54,7 +67,7 @@ class PatronController {
 				log.info "Count of Person Table: " + list
 				
 				//Add user to wait queue
-				def queueInstance = new Queue(isInLine: true, person: personInstance)
+				def queueInstance = new Queue(isInLine: true, person: personInstance, purpose: flow.purpose)
 				if (!queueInstance.save(flush: true)) {
 					//render(view: "create", model: [personInstance: personInstance])
 					return
@@ -76,6 +89,9 @@ class PatronController {
 		}
 		displayPersons {
 			redirect(controller: "Person", action: "index")
+		}
+		displayMenu {
+			redirect(action: 'showMenu')
 		}
 	}
 }

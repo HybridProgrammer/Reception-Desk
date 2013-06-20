@@ -5,6 +5,7 @@ import reception.desk.Person
 import reception.desk.Student
 import reception.desk.Stats
 import reception.desk.Major
+import reception.desk.Function
 
 class BootStrap {
 	def springSecurityService
@@ -25,6 +26,22 @@ class BootStrap {
 			}
 
 		log.info "Created user admin/admin."
+		
+		//Load functions
+		Function.findByName('advising') ?: new Function(name: 'advising', description: 'Advising for semester classes').save(failOnError: true)
+		Function.findByName('permNHolds') ?: new Function(name: 'permNHolds', description: 'Permission/Holds Removed').save(failOnError: true)
+		Function.findByName('changeMajor') ?: new Function(name: 'changeMajor', description: 'Change of Major').save(failOnError: true)
+		Function.findByName('graduation') ?: new Function(name: 'graduation', description: 'Graduation Applications/Issues').save(failOnError: true)
+		Function.findByName('dl') ?: new Function(name: 'dl', description: 'Distance Learning').save(failOnError: true)
+		Function.findByName('petitions') ?: new Function(name: 'petitions', description: 'Petitions').save(failOnError: true)
+		Function.findByName('buildingTour') ?: new Function(name: 'buildingTour', description: 'Building Tour').save(failOnError: true)
+		Function.findByName('questionCollege') ?: new Function(name: 'questionCollege', description: 'General Information on our College').save(failOnError: true)
+		Function.findByName('scolarships') ?: new Function(name: 'scolarships', description: 'Scholarships').save(failOnError: true)
+		Function.findByName('programs') ?: new Function(name: 'programs', description: 'Dual Enrollment/Summer Programs').save(failOnError: true)
+		Function.findByName('other') ?: new Function(name: 'other', description: 'Other').save(failOnError: true)
+		
+		
+		
 		
 		//Init can only be called once
 		Stats statInit = Stats.find { name == 'init' }
