@@ -10,6 +10,7 @@ class Queue implements Serializable  {
 	Date dateCreated
 	Date lastUpdated
 	Boolean isInLine
+	Integer callNumber 
 	
 	Person person
 	Function purpose
