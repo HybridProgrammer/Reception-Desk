@@ -24,7 +24,7 @@
 				<thead>
 					<tr>
 					
-						<g:sortableColumn property="name" title="${message(code: 'queue.dateCreated.label', default: 'Added')}" />
+						<g:sortableColumn property="name" title="${message(code: 'queue.dateCreated.label', default: 'Wait Time')}" />
 					
 						<g:sortableColumn property="email" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
 					
@@ -35,8 +35,8 @@
 				<g:each in="${queueInstanceList}" status="i" var="queueInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					<!-- http://user.xmission.com/~goodhill/dates/deltaDates.html -->
-					<!-- <g:set var="waitTime" value="{now.diff(new Date(queueInstanceList.dateCreated.last().getTime()))}" /> -->
-						<td>${now}</td>
+					
+						<td><g:waitTime queueInstance="${queueInstance}"></g:waitTime></td>
 					
 						<td>${fieldValue(bean: queueInstance, field: "person.name")}</td>
 					
