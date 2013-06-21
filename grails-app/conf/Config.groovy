@@ -102,6 +102,6 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'reception.des
 grails.plugins.springsecurity.authority.className = 'reception.desk.Role'
 
 // Autorun Database Migrations
-grails.plugin.databasemigration.updateOnStart = true
-grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
+//grails.plugin.databasemigration.updateOnStart = true
+//grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
 
