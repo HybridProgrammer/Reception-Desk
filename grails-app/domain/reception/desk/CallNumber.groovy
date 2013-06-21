@@ -28,7 +28,7 @@ class CallNumber implements Serializable {
 	 * Increments current to current + 1. If it reaches Integer max we will reset to zero
 	 */
 	static getNext() {
-		def cn = CallNumber.findByDateCreated(new Date()) ?: new CallNumber().save(failOnError: true)
+		def cn = CallNumber.findByDateCreatedGreaterThanEquals(new Date().clearTime()) ?: new CallNumber().save(failOnError: true)
 		
 		if(cn.getCurrent() +1 > Integer.MAX_VALUE) {
 			cn.setCurrent(0);
