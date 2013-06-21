@@ -7,8 +7,12 @@ class QueueController {
 	}
 	
 	def list(Integer max) {
+		queryCurrentDay()
+	}
+	
+	def listAll(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		[queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count()]
+		render(view: "list", model: [queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count()])
 	}
 	
 	/**
@@ -17,6 +21,10 @@ class QueueController {
 	 * @return
 	 */
 	def lobbyList(Integer max) {
+		queryCurrentDay()
+	}
+	
+	def queryCurrentDay(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
 		def query = Queue.findByDateCreatedGreaterThanEquals(new Date().clearTime())
 		query = Queue.where {
