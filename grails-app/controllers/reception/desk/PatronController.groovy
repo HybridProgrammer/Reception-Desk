@@ -72,6 +72,9 @@ class PatronController {
 					//render(view: "create", model: [personInstance: personInstance])
 					return
 				}
+				
+				//long DAY_IN_MS = 1000 * 60 * 60 * 24;
+				//queueInstance.setDateCreated(new Date(System.currentTimeMillis() - (7 * DAY_IN_MS)))
 			}.to "enterWaitQueue"
 			on("cancel").to "askPurpose"
 		}

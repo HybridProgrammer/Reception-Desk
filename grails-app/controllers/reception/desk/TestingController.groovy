@@ -42,8 +42,6 @@ class TestingController {
 		Function.findByName('other') ?: new Function(name: 'other', description: 'Other').save(failOnError: true)
 		
 		
-		
-		
 		//Init can only be called once
 		Stats statInit = Stats.find { name == 'init' }
 		if(statInit != null) {
@@ -72,6 +70,14 @@ class TestingController {
 			def person = Person.get(1)
 			//println person.
 			log.info "Count of Person Table: " + p
+			
+			long DAY_IN_MS = 1000 * 60 * 60 * 24;
+			def queueInstance = new Queue(isInLine: true, person: Person.last(), purpose: Function.last(), callNumber: CallNumber.getNext(), dateCreated: new Date(System.currentTimeMillis() - (7 * DAY_IN_MS)))
+			if (!queueInstance.save(flush: true)) {
+				//render(view: "create", model: [personInstance: personInstance])
+				return
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return
