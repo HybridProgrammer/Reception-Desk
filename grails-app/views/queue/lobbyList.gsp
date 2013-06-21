@@ -47,8 +47,6 @@
 						<td>${fieldValue(bean: queueInstance, field: "person.name")}</td>
 						
 						<td>${fieldValue(bean: queueInstance, field: "purpose.description")}</td>
-						
-						<td>${fieldValue(bean: queueInstance, field: "dateCreated")}</td>
 					
 					</tr>
 				</g:each>

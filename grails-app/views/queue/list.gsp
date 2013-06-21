@@ -29,6 +29,8 @@
 						<g:sortableColumn property="email" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
 						
 						<g:sortableColumn property="email" title="${message(code: 'queue.purpose.name.label', default: 'Purpose')}" />
+						
+						<g:sortableColumn property="email" title="${message(code: 'queue.dateCreated.label', default: 'Date Created')}" />
 					
 					</tr>
 				</thead>
@@ -41,7 +43,10 @@
 						<td><g:waitTime queueInstance="${queueInstance}"></g:waitTime></td>
 					
 						<td>${fieldValue(bean: queueInstance, field: "person.name")}</td>
+						
 						<td>${fieldValue(bean: queueInstance, field: "purpose.description")}</td>
+						
+						<td>${fieldValue(bean: queueInstance, field: "dateCreated")}</td>
 					
 					</tr>
 				</g:each>
