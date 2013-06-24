@@ -68,12 +68,25 @@ class QueueController {
 		render(view: "show", model: [queueInstance: queueInstance])
 	}
 	
+	def inLine(Long id) {
+		def queueInstance = Queue.get(id)
+		if (!queueInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Entry'), id])
+			redirect(action: "list")
+			return
+		}
+		
+		queueInstance.getInLine()
+
+		render(view: "show", model: [queueInstance: queueInstance])
+	}
+	
 	def removeFromLine(Long id) {
 		def queueInstance = Queue.get(id)
 		
 		if (!queueInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Entry'), id])
-			redirect(action: "list")
+			//redirect(action: "list")
 			return
 		}
 		

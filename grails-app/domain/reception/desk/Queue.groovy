@@ -19,4 +19,9 @@ class Queue implements Serializable  {
 		isInLine = false
 		this.save()
 	}
+	
+	def getInLine() {
+		isInLine = true
+		this.save()
+	}
 }
