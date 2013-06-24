@@ -24,6 +24,10 @@
 				<thead>
 					<tr>
 					
+						<g:sortableColumn property="callNumber" title="${message(code: 'queue.action.label', default: 'Action')}" />
+					
+						<g:sortableColumn property="callNumber" title="${message(code: 'queue.callNumber.label', default: '#')}" />
+											
 						<g:sortableColumn property="name" title="${message(code: 'queue.dateCreated.label', default: 'Wait Time')}" />
 					
 						<g:sortableColumn property="email" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
@@ -39,6 +43,10 @@
 				<g:each in="${queueInstanceList}" status="i" var="queueInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					<!-- http://user.xmission.com/~goodhill/dates/deltaDates.html -->
+					
+						<td><g:link action="call" id="${queueInstance.id}">Call</g:link></td>
+						
+						<td>${fieldValue(bean: queueInstance, field: "callNumber")}</td>
 					
 						<td><g:waitTime queueInstance="${queueInstance}"></g:waitTime></td>
 					
