@@ -14,4 +14,9 @@ class Queue implements Serializable  {
 	
 	Person person
 	Function purpose
+	
+	def getOutOfLine() {
+		isInLine = false
+		this.save()
+	}
 }

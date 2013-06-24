@@ -41,10 +41,16 @@ class TestingController {
 		Function.findByName('programs') ?: new Function(name: 'programs', description: 'Dual Enrollment/Summer Programs').save(failOnError: true)
 		Function.findByName('other') ?: new Function(name: 'other', description: 'Other').save(failOnError: true)
 		
+		def queueInstance = new Queue(isInLine: true, person: new Person(student:null, name:'student 1', email: 'student@fau.edu', zNumber:'z12345678').save(flush:true, failOnError:true), purpose: Function.last(), callNumber: CallNumber.getNext())
+		if (!queueInstance.save(flush: true)) {
+			//render(view: "create", model: [personInstance: personInstance])
+			return
+		}
 		
 		//Init can only be called once
 		Stats statInit = Stats.find { name == 'init' }
 		if(statInit != null) {
+			
 			log.info "init has already executed. Nothing to do."
 			return
 		}
@@ -72,7 +78,11 @@ class TestingController {
 			log.info "Count of Person Table: " + p
 			
 			long DAY_IN_MS = 1000 * 60 * 60 * 24;
-			def queueInstance = new Queue(isInLine: true, person: Person.last(), purpose: Function.last(), callNumber: CallNumber.getNext(), dateCreated: new Date(System.currentTimeMillis() - (7 * DAY_IN_MS)))
+			//def queueInstance = new Queue(isInLine: true, person: new Person(student:null, name:'student 1', email: 'student@fau.edu', zNumber:'z12345678'), purpose: Function.last(), callNumber: CallNumber.getNext(), dateCreated: new Date(System.currentTimeMillis() - (7 * DAY_IN_MS)))
+			if (!queueInstance.save(flush: true)) {
+				//render(view: "create", model: [personInstance: personInstance])
+				return
+			}
 			if (!queueInstance.save(flush: true)) {
 				//render(view: "create", model: [personInstance: personInstance])
 				return

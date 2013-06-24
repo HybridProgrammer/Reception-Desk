@@ -44,7 +44,7 @@
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					<!-- http://user.xmission.com/~goodhill/dates/deltaDates.html -->
 					
-						<td><g:link action="call" id="${queueInstance.id}">Call</g:link></td>
+						<td><g:link class="call" action="call" id="${queueInstance.id}"><g:message code="default.button.call.label" default="Call" /></g:link></td>
 						
 						<td>${fieldValue(bean: queueInstance, field: "callNumber")}</td>
 					
