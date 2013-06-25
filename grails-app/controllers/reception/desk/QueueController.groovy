@@ -1,6 +1,7 @@
 package reception.desk
 
 class QueueController {
+	def jmsService
 
     def index() { 
 		redirect(action: "lobbyList")

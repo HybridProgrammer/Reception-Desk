@@ -4,6 +4,7 @@ grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
+grails.tomcat.nio=true
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
 // uncomment (and adjust settings) to fork the JVM to isolate classpaths
@@ -43,6 +44,16 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.22'
 		compile "org.grails:grails-webflow:$grailsVersion"
+		
+		compile('org.apache.activemq:activemq-core:5.3.0',
+			'org.apache.activemq:activeio-core:3.1.2',
+			'org.apache.xbean:xbean-spring:3.7') {
+		  excludes 'activemq-openwire-generator'
+		  excludes 'commons-logging'
+		  excludes 'xalan' // IVY-1006 - use xalan 2.7.0 to avoid (see below)
+		  excludes 'xml-apis' // GROOVY-3356
+		  exported = false
+			}
     }
 
     plugins {
@@ -73,5 +84,9 @@ grails.project.dependency.resolution = {
 		build ':jbossas:1.0'
 		
 		compile ":famfamfam:1.0.1"
+		
+		compile ":atmosphere:0.4.2.1"
+		compile ":activemq:0.4.1"
+		compile ":jms:1.2"
     }
 }

@@ -8,6 +8,31 @@
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 		<g:javascript library="jquery" />
 		<r:require module="jquery-ui"/>
+		<atmosphere:resources/>
+        <script type="text/javascript">
+        $(document).ready(function() {
+                // jquery.atmosphere.response
+                function callback(response) {
+                    if (response.status == 200) {
+                        var data = response.responseBody;
+                        if (data.length > 0) {
+                            try {
+                                var msgObj = jQuery.parseJSON(data);
+                                if (msgObj.id > 0) {
+                                    var row = '<tr><td>' + msgObj.id + '</td><td>' + msgObj.body + '</td><td></td></tr>'
+                                    $('tbody').append(row);
+                                }
+                            } catch (e) {
+                                // Atmosphere sends commented out data to WebKit based browsers
+                            }
+                        }
+                    }
+                }
+
+                var location = 'http://localhost:8080/reception-desk/atmosphere/messages';
+                $.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
+        });
+        </script>
 	</head>
 	<body>
 		<a href="#list-queue" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>

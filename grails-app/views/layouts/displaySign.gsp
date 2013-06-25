@@ -14,8 +14,8 @@
 		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'displaySign.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
-		<g:layoutHead/>
 		<r:layoutResources />
+		<g:layoutHead/>
 	</head>
 	<body>
 		<div id="banner" role="banner"><h1>Waiting List</h1></div>
