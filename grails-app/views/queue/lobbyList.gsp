@@ -15,21 +15,28 @@
                 function callback(response) {
                     if (response.status == 200) {
                         var data = response.responseBody;
+                        data = data.substr(data.indexOf('<script>'), data.length-data.indexOf('<script>')) /* strip comment buffer from Atmosphere */
+                        data = data.substr(data.indexOf('<script>parent.callback(\'')+'<script>parent.callback(\''.length, data.length-(data.indexOf('<script>')+'<script>parent.callback(\''.length))
+                        data = data.substr(0, data.length-(data.indexOf('<\script>')+13))
                         if (data.length > 0) {
                             try {
                                 var msgObj = jQuery.parseJSON(data);
                                 if (msgObj.id > 0) {
                                     var row = '<tr><td>' + msgObj.id + '</td><td>' + msgObj.body + '</td><td></td></tr>'
                                     $('tbody').append(row);
+
+                                    console.log(row);
                                 }
                             } catch (e) {
                                 // Atmosphere sends commented out data to WebKit based browsers
+                                alert(e);
                             }
                         }
                     }
                 }
 
                 var location = 'http://localhost:8080/reception-desk/atmosphere/messages';
+                $.atmosphere.request.callback = "cb";
                 $.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
         });
         </script>

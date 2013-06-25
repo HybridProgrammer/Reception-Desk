@@ -1,5 +1,7 @@
 package reception.desk
 
+import grails.converters.JSON
+
 class QueueController {
 	def jmsService
 
@@ -52,6 +54,8 @@ class QueueController {
 			redirect(action: "list")
 			return
 		}
+		
+		jmsService.send(queue:'msg.new', "Hello")
 		
 		[queueInstance: queueInstance]
 	}
