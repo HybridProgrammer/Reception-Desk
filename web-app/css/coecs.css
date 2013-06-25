@@ -1,0 +1,292 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/* 
+h1 Titles on rotating banner
+h2 Captions on rotating banner
+h3 Secondary pages main titles in body section
+h4 Event Titles
+h5 Secondary pages subtitles in body section
+h6 Menu dropdown title for TSG under student resources
+
+IMAGES
+Use class rightimg or leftimg depending on alignment for correct padding
+*/
+
+
+html, div, span {
+	margin:0;
+	padding:0;
+}
+
+html {
+	font-size: 100%;
+	overflow-y: scroll;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+body {
+	margin:0;
+	font-size: .625em;
+	background-color:#999;
+}
+body, button, input {
+	font-family: Verdana, Geneva, sans-serif;
+	color: #585858;
+}
+		
+a:link { color: #990000; text-decoration: none; outline:none;} 
+a:visited { color: #990000; text-decoration: none; outline:none;} 
+a:hover { color: #990000; text-decoration: underline; }
+a:active { color: #990000; text-decoration: underline; }
+
+:-moz-any-link:focus {
+  outline: none;
+}
+
+#topCollegeWrap {
+	width:100%;
+	background: url("../images/common/top_bg.jpg");
+	background-repeat:repeat-x;
+	background-color:#fff;
+	height:115px;
+	margin:0;
+	padding:0 0 30px 0;
+	float:left;
+}
+#topCollegeContent {
+	width:960px;
+	margin:0 auto; 
+	padding:0;
+}
+
+
+/* =============================================================================
+   Header Logo Image Map
+   ========================================================================== */
+
+dl.image_map_header {display:block; width:956px; height:101px; background:url(../images/head_logo.png); background-repeat:no-repeat; position:absolute; margin-top:0; z-index:10;}
+a.linkcollege {left:191px; top:17px; background:transparent; }
+a.linkcollege {display:block; width:460px; height:0; padding-top:35px; overflow:hidden; position:absolute;}
+a.linkcollege:hover  {background:transparent; border:none;}
+a.linkfau {left:10px; top:0px; background:transparent;}
+a.linkfau {display:block; width:176px; height:0; padding-top:69px; overflow:hidden; position:absolute;}
+a.linkfau:hover  {background:transparent; border:none;}
+
+.college_topLinks {	float:right; position:relative;	color:#ccc; font-size:.875em; margin-top:40px; z-index:20; }
+a.topLinks:link {color:#ccc; text-decoration:none;}
+a.topLinks:visited {color:#ccc; text-decoration:none;}
+a.topLinks:hover {color:#fff; text-decoration:underline;}
+a.topLinks:active {color:#ccc; text-decoration:underline;}
+
+/* =============================================================================
+   SEARCH BOX
+   ========================================================================== */
+#search_box{ float:right; position:relative; z-index:20; margin:10px 0 0 0;}
+#search_box { outline:none;}
+
+/* BODY AREA */
+
+#CollegeBodyWrap {
+	width:100%;
+	margin:0;
+	padding:0;
+	background:url("../images/common/body_bg.jpg");
+	background-repeat:repeat-x;
+	background-color:#fff;
+	float:left;
+}
+
+#CollegeBodyContent {
+	width:960px;
+	margin:0 auto;
+	padding:0;
+}
+
+.breadcrumb {margin:0 0 20px 0; padding:8px 0 0 0; float:left; width:960px;	border-top:1px solid #e2e2e2; color:#999; font-family:Verdana, Geneva, sans-serif; font-size:1.1em;}
+.breadcrumb a:link {color: #666; text-decoration: none; outline:none;} 
+.breadcrumb a:visited {color: #666; text-decoration: none; outline:none;} 
+.breadcrumb a:hover {color: #666; text-decoration: underline; outline:none;}
+.breadcrumb a:active {color: #666; text-decoration: underline; outline:none;}
+
+/* secondary pages */
+
+h3 {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-weight:normal; font-size:2.75em; line-height:1em; color:#002d62; margin:0 0 10px 0; padding:0;}
+h5 {font-family:Verdana, Geneva, sans-serif; font-weight:normal; font-size:1.25em; line-height:1.5em; color:#002d62; margin:8px 0 0 0; padding:0;}
+.leftimg { padding:10px 20px 0 0;}
+.rightimg { padding:10px 0 0 20px;}
+.contact { font-family:Verdana, Geneva, sans-serif; color:#002d62; font-size:1.25em; background-color:#e2e2e2; display:block; padding:4px 8px 8px 8px; margin:40px 0;}
+.contact p { font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-weight:bold; color:#002d62; font-size:1.5em; letter-spacing:1px; margin:0; padding:0;}
+.print {font-family:Verdana, Geneva, sans-serif; font-size:.825em; float:right;}
+.box {font-family:Verdana, Geneva, sans-serif; font-size:.825em; background-color:#d4d4d4; color:#002d62; padding:0 5px 2px 5px;}
+.top {font-family:Verdana, Geneva, sans-serif; font-size:.825em;}
+
+/* One Column Body No Menu */
+#bodyonly {float:left; width:960px; margin-bottom:40px; padding-bottom:20px; font-family:Verdana, Geneva, sans-serif; font-size:1.25em; line-height:1.625em;}
+#bodyonly a:link {color: #990000; text-decoration: none; outline:none;} 
+#bodyonly a:visited {color: #990000; text-decoration: none; outline:none;} 
+#bodyonly a:hover {color: #990000; text-decoration: underline; outline:none;} 
+#bodyonly a:active {color: #990000; text-decoration: underline; outline:none;} 
+
+/* left menu */
+#leftmenu {float:left; width:230px; margin-bottom:30px;}
+.leftmenutitle {width:230px; margin:0 0 7px 0; padding:0 0 5px 0; float:left; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:2.25em; line-height:1.2em; color:#002d62; border-bottom: 5px solid #990000; }
+#leftmenu ul {list-style-type:none; width:230; margin:0; padding:0;}
+#leftmenu ul li {font-family:Verdana, Geneva, sans-serif; font-size:1.5em; line-height:1.825em; display:block;}
+#leftmenu ul li a:link {color: #666; text-decoration: none; outline:none;} 
+#leftmenu ul li a:visited {color: #666; text-decoration: none; outline:none;} 
+#leftmenu ul li a:hover {color: #990000; text-decoration: none; outline:none;} 
+#leftmenu ul li a:active {color: #990000; text-decoration: none; outline:none;} 
+
+/* body area with left menu */
+#leftmenubody {float:right; width:700px; margin:0 0 40px 30px; padding-bottom:20px; font-family:Verdana, Geneva, sans-serif; font-size:1.25em; line-height:1.625em;}
+#leftmenubody a:link {color: #990000; text-decoration: none; outline:none;} 
+#leftmenubody a:visited {color: #990000; text-decoration: none; outline:none;} 
+#leftmenubody a:hover {color: #990000; text-decoration: underline; outline:none;} 
+#leftmenubody a:active {color: #990000; text-decoration: underline; outline:none;} 
+
+/* social icons */
+.socialmenutitle {width:230px; margin:0 0 5px 0; padding:0 0 3px 0; float:left; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-weight:bold; font-size:2em; line-height:1.2em; color:#002d62; border-bottom: 5px solid #990000; }
+#socials {float:left; width:230px; margin-bottom:40px;}
+#socials .socials li {list-style:none;display:inline;}
+#socials .socials li a {width:40px; height:37px; display:inline-block; text-indent:100%; white-space:nowrap; overflow:hidden; margin:0; background:url('../images/common/social-icons.png') 0 0 no-repeat;position:relative;}
+#socials .socials li a.fb{background-position:0 0; position:absolute;}
+#socials .socials li a.tw{background-position:-40px 0; margin-left:43px;}
+#socials .socials li a.yt{background-position:-80px 0;}
+#socials .socials li a.vi{background-position:-120px 0;}
+
+#socials .socials li a span{content:"";position:relative;top:0;left:0;bottom:0;right:0; background:url('../images/common/social-icons.png') 0 0 no-repeat;opacity:0;-webkit-transition:opacity .5s ease-out;-moz-transition:opacity .5s ease-out;-o-transition:opacity .5s ease-out; }
+#socials .socials li a:hover{background:none;}
+#socials .socials li a:hover span{opacity:1; position:absolute; /*position needed for IE7*/}
+#socials .socials li a.fb span{background-position:0 -38px;}
+#socials .socials li a.tw span{background-position:-40px -38px;}
+#socials .socials li a.yt span{background-position:-80px -38px;}
+#socials .socials li a.vi span{background-position:-120px -38px;}
+noindex:-o-prefocus,#socials .socials a{text-indent:-9999px; !important}
+
+/* body area with right menu */
+#rightmenubody {float:left; width:700px; margin:0 30px 30px 0; padding-bottom:20px; font-family:Verdana, Geneva, sans-serif; font-size:1.25em; line-height:1.625em; *padding-bottom:50px; /* IE 7*/}
+#rightmenubody a:link {color: #990000; text-decoration: none; outline:none;} 
+#rightmenubody a:visited {color: #990000; text-decoration: none; outline:none;} 
+#rightmenubody a:hover {color: #990000; text-decoration: underline; outline:none;} 
+#rightmenubody a:active {color: #990000; text-decoration: underline; outline:none;}
+#rightmenubody ul {list-style-type:square; list-style-position:inside; text-indent:-14px;} 
+
+/* right menu */
+#rightmenu {float:right; width:230px; margin-bottom:30px;}
+.rightmenutitle {width:230px; margin:0 0 7px 0; padding:0 0 5px 0; float:left; font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:2.25em; line-height:1.2em; color:#002d62; border-bottom: 5px solid #990000; }
+#rightmenu ul {list-style-type:none; width:230; margin:0; padding:0;}
+#rightmenu ul li {font-family:Verdana, Geneva, sans-serif; font-size:1.25em; display:block; padding-bottom:10px;}
+#rightmenu ul li a:link {color: #002d62; text-decoration: none; outline:none;} 
+#rightmenu ul li a:visited {color: #002d62; text-decoration: none; outline:none;} 
+#rightmenu ul li a:hover {color: #990000; text-decoration: none; outline:none;} 
+#rightmenu ul li a:active {color: #990000; text-decoration: none; outline:none;} 
+
+.quicklinks {background:url(../images/common/quicklinksbg.jpg); background-repeat:no-repeat; display:block; padding:5px 8px 8px 30px; margin:15px 0 20px -11px;}
+.quicklinks p {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; color:#fff; font-size:2em; letter-spacing:1px; line-height:1.5em; margin:-4px 0 0 -8px; padding:0 0 10px 0;}
+
+
+/* EVENTS & NEWS SECTION */
+#events_newsWrap {
+	width:100%;
+	margin:-30px 0 10px 0;
+	padding:0;
+	background:url("../images/event_news_bg.jpg");
+	background-repeat:repeat-x;
+	background-color:#e2e2e2;
+	float:left;
+}
+
+#events_newsContent {	
+	width: 960px;
+	margin: 0 auto;
+	padding:40px 0 20px 0;
+}
+
+.view_events-news {margin:-25px 0 0 0; padding:0; float:right; font-family:Verdana, Geneva, sans-serif; font-size:1em; position:relative;
+*width:90px;/*IE 7 and below*/}
+#events_newsWrap .view_events-news a:link {color: #990000; text-decoration: none; outline:none;} 
+#events_newsWrap .view_events-news a:visited {color: #990000; text-decoration: none; outline:none;} 
+#events_newsWrap .view_events-news a:hover {color: #990000; text-decoration: underline; }
+#events_newsWrap .view_events-news a:active {color: #990000; text-decoration: underline; }
+
+#events {float:left; width:185px;}
+.eventhead {width:185px; margin:0; padding:0; float:left; font-family:Verdana, Geneva, sans-serif; font-size:1.825em; line-height:1.625em; color:#002d62; border-bottom: 5px solid #990000;}
+
+.date_bg{width:30px; height:40px; margin:20px 0 0 0; padding:3px 0 0 0; float:left; position:relative;background-image:url("../images/event_date_bg.jpg"); background-repeat:no-repeat; text-align:center;} 
+.month{font-family:Verdana, Geneva, sans-serif;font-size:1.12em;line-height:1.25em;color:#fff;text-transform:uppercase; font-weight:bold;}
+.day{font-family:Arial, Helvetica, sans-serif;font-weight:bold;font-size:2em;color:#fff;}
+
+#events h4 {width:145px; margin:-43px 0 0 40px; padding:0; float:left;font-family:Verdana, Geneva, sans-serif; font-size:1.3em; line-height:1.4em;font-weight:normal;}  
+#events h4 a:link {color: #666; text-decoration: none; outline:none;} 
+#events h4 a:visited {color: #666; text-decoration: none; outline:none;} 
+#events h4 a:hover {color: #990000; text-decoration: none; outline:none;}
+#events h4 a:active {color: #990000; text-decoration: none; outline:none;}
+
+#news {float:right; width:775px;}
+.newshead {width:725px; margin:0; padding:0; float:right; font-family:Verdana, Geneva, sans-serif; font-size:1.825em; line-height:1.625em; color:#002d62; border-bottom: 5px solid #990000;}
+
+#news ul {list-style-type:none; width:725; margin:30px 0 0 10px; *margin-top:0;/*IE 7 and below*/}
+#news ul li {margin-bottom:30px;}
+#news ul li .thumb {margin:20px 10px -5px 0;}
+#news ul li .newstitle {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:1.825em; display:block; margin:-82px 0 0 135px;}
+#news ul li .newscaption {font-family:Verdana, Geneva, sans-serif; font-size:1.3em; line-height:1.4em; display:block; margin:0 0 0 135px;} 
+#news ul li a:link {color: #002d62; text-decoration: none; outline:none;} 
+#news ul li a:visited {color: #002d62; text-decoration: none; outline:none;} 
+#news ul li a:hover {color: #990000; text-decoration: none; outline:none;} 
+#news ul li a:active {color: #990000; text-decoration: none; outline:none;} 
+
+/* CHAIR'S MESSAGE & DEPT NEWS SECTION */
+#dept_newsWrap {width:100%; margin:-30px 0 10px 0; padding:0; background:url("../images/ceecs_news_bg.jpg"); background-repeat:repeat-x; background-color:#e2e2e2; float:left; }
+#dept_newsContent {	width: 960px; margin: 0 auto; padding:40px 0 20px 0; }
+
+/* CODE FOR CSS TABLES THAT WEREN'T WORKING IN IE7 
+#table	{display:table;}
+.row {display: table-row;}
+.cell {display: table-cell;}*/
+.caption {font-size:.825em; line-height:1.25em;}
+
+/* COMMITTEES */
+#committees {width:700px; margin:0 auto;}
+
+/* FACULTY PROFILES */
+.faculty-photo {float:left; padding-right:20px; margin:0; }
+.faculty {font-family:Verdana, Geneva, sans-serif; font-weight:normal; font-size:1.25em; line-height:1.5em; color:#002d62; margin:8px 0 0 0; padding:0;}
+.faculty-rule {border-bottom:1px solid #e2e2e2; margin:0 10px 10px 0; padding:0;}
+
+/* FOOTER */
+#collegefooter {
+	width:100%;
+	background:url("../images/common/collegefooter_bg.jpg");
+	background-repeat: repeat-x;
+	background-color:#999;
+	float:left;
+	margin: -10px 0 0 0;
+	padding: 14px 0 0 10px;
+}
+
+#collegefooter_wrapper {width:960px; margin-top: 0;	margin-right: auto;	margin-bottom: 0;	margin-left: auto;	padding: 0px;}
+.collegefooter_title {font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif; font-size:1.6em; color:#fff; letter-spacing:1px; margin-top:-2px;}
+#collegefooter .collegefooter_title  a:link {color: #fff; text-decoration: none; outline:none;} 
+#collegefooter .collegefooter_title  a:visited {color: #fff; text-decoration: none; outline:none;} 
+#collegefooter .collegefooter_title  a:hover {color: #fff; text-decoration: none; outline:none;} 
+#collegefooter .collegefooter_title  a:active {color: #fff; text-decoration: none; outline:none;} 
+
+.collegefooter_text {font-family:Verdana, Geneva, sans-serif; font-size:1em; color:#660000; margin-top:18px;}
+#collegefooter .collegefooter_text a:link {color: #660000; text-decoration: none; outline:none;} 
+#collegefooter .collegefooter_text a:visited {color: #660000; text-decoration: none; outline:none;} 
+#collegefooter .collegefooter_text a:hover {color: #990000; text-decoration: none; outline:none;} 
+#collegefooter .collegefooter_text a:active {color: #990000; text-decoration: none; outline:none;} 
+
+.universityfooter_text {font-family:Verdana, Geneva, sans-serif; font-size:1em; color:#444; margin-top:40px; line-height:1.825em; height:65px;}
+.universityfooter_text img {margin-top:-25px; padding:0; }
+#collegefooter .universityfooter_text a:link {color: #444; text-decoration: none; outline:none;} 
+#collegefooter .universityfooter_text a:visited {color: #444; text-decoration: none; outline:none;} 
+#collegefooter .universityfooter_text a:hover {color: #666; text-decoration: none; outline:none;} 
+#collegefooter .universityfooter_text a:active {color: #666; text-decoration: none; outline:none;} 
+
+
+
+
