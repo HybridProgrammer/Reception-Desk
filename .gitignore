@@ -18,6 +18,8 @@
 
 # default HSQL database files for production mode
 /prodDb.*
+/devDB*
+/testDB*
 
 # general HSQL database files
 *Db.properties
