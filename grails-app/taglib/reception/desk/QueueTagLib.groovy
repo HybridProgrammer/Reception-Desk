@@ -1,5 +1,7 @@
 package reception.desk
 
+import grails.converters.JSON
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,5 +18,19 @@ class QueueTagLib {
 		
 		out << body() << String.format("%02d", waitInHours) + ":" + String.format("%02d", waitInMinutes);
 	}
+
+    def getPersonJSON = { attrs, body ->
+        Queue queueInstance = attrs.queueInstance
+        Person p = Person.get(queueInstance.person.id)
+
+        out << body() << (p as JSON).toString();
+    }
+
+    def getPurposeJSON = { attrs, body ->
+        Queue queueInstance = attrs.queueInstance
+        Function f = Function.get(queueInstance.purpose.id)
+
+        out << body() << (f as JSON).toString();
+    }
 
 }

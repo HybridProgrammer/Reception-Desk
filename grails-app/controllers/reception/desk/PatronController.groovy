@@ -1,9 +1,11 @@
 package reception.desk
 
 import javax.persistence.OneToMany;
+import grails.converters.JSON
 
 class PatronController {
 	def springSecurityService
+    def jmsService
 	
 
     def index() {
@@ -72,6 +74,10 @@ class PatronController {
 					//render(view: "create", model: [personInstance: personInstance])
 					return
 				}
+
+                //notify the browser of a new patron
+                def jsonQueue = queueInstance as JSON
+                jmsService.send(queue:'msg.enqueue', jsonQueue.toString())
 				
 				//long DAY_IN_MS = 1000 * 60 * 60 * 24;
 				//queueInstance.setDateCreated(new Date(System.currentTimeMillis() - (7 * DAY_IN_MS)))

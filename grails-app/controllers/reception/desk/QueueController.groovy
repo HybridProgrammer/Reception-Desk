@@ -1,6 +1,7 @@
 package reception.desk
 
 import grails.converters.JSON
+import java.util.Date
 
 class QueueController {
 	def jmsService
@@ -10,7 +11,7 @@ class QueueController {
 	}
 	
 	def list(Integer max) {
-		queryCurrentDayInLine()
+		queryCurrentDayInLine(max)
 	}
 	
 	def listAll(Integer max) {
@@ -24,7 +25,8 @@ class QueueController {
 	 * @return
 	 */
 	def lobbyList(Integer max) {
-		queryCurrentDayInLine()
+        max = 200
+		queryCurrentDayInLine(max)
 	}
 	
 	def queryCurrentDay(Integer max) {
@@ -37,10 +39,10 @@ class QueueController {
 	}
 	
 	def queryCurrentDayInLine(Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+		params.max = Math.min(max ?: 10, 200)
 		def query = Queue.findByDateCreatedGreaterThanEquals(new Date().clearTime())
 		query = Queue.where {
-			dateCreated >= new Date().clearTime() && isInLine == true
+			dateCreated >= new Date().clearTime() && (isInLine == true || (hour(timeCalled) == (new Date().getHours()) && minute(timeCalled) >= (new Date().getMinutes() - 5)))
 		}
 		[queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
 	}
@@ -54,8 +56,13 @@ class QueueController {
 			redirect(action: "list")
 			return
 		}
-		
-		jmsService.send(queue:'msg.new', "Hello")
+        queueInstance.setTimeCalled( new Date())
+        queueInstance.setGoToRoom("T-EE102A")
+        def save = queueInstance.save()
+
+		def jsonQueue = queueInstance as JSON
+		jmsService.send(queue:'msg.call', jsonQueue.toString())
+        log.info(jsonQueue)
 		
 		[queueInstance: queueInstance]
 	}
@@ -97,4 +104,15 @@ class QueueController {
 		
 		queueInstance.getOutOfLine();
 	}
+
+    def show(Long id) {
+        def queueInstance = Queue.get(id)
+        if (!queueInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Queue'), id])
+            redirect(action: "index")
+            return
+        }
+
+        [queueInstance: queueInstance]
+    }
 }

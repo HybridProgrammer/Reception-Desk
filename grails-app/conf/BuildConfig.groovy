@@ -12,13 +12,15 @@ grails.tomcat.nio=true
 //   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
 //]
 
+//grails.config.base.webXml = "file:${basedir}/web-app/WEB-INF/atmosphere-cache.xml"
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
         // excludes 'ehcache'
     }
-    log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
     legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
 
@@ -54,6 +56,8 @@ grails.project.dependency.resolution = {
 		  excludes 'xml-apis' // GROOVY-3356
 		  exported = false
 			}
+
+        //compile ":tomcatnio:1.3.4"
     }
 
     plugins {
@@ -67,7 +71,8 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.5"
 
-        build ":tomcat:$grailsVersion"
+        //build ":tomcat:$grailsVersion"
+        compile ":jetty:2.0.3"
 
         runtime ":database-migration:1.3.2"
 

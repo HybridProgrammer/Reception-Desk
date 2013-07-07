@@ -5,12 +5,16 @@ import java.io.Serializable;
 class Queue implements Serializable  {
 
     static constraints = {
+        goToRoom nullable: true
+        timeCalled nullable: true
     }
 	
 	Date dateCreated
 	Date lastUpdated
+    Date timeCalled
 	Boolean isInLine
-	Integer callNumber 
+	Integer callNumber
+    String goToRoom
 	
 	Person person
 	Function purpose

@@ -43,8 +43,11 @@
 				<g:each in="${queueInstanceList}" status="i" var="queueInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					<!-- http://user.xmission.com/~goodhill/dates/deltaDates.html -->
-					
-						<td><g:link class="call" action="call" id="${queueInstance.id}"><g:message code="default.button.call.label" default="Call" /></g:link></td>
+
+						<td>
+                        <g:if test='${queueInstance.inLine} == true' ><g:link class="call" action="call" id="${queueInstance.id}"><g:message code="default.button.call.label" default="Call" /></g:link> | </g:if>
+                        <g:link class="view" action="show" id="${queueInstance.id}"><g:message code="default.button.view.label" default="View" /></g:link>
+                    </td>
 						
 						<td>${fieldValue(bean: queueInstance, field: "callNumber")}</td>
 					

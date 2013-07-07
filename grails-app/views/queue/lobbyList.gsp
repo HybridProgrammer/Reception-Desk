@@ -9,35 +9,255 @@
 		<g:javascript library="jquery" />
 		<r:require module="jquery-ui"/>
 		<atmosphere:resources/>
+
+        <script type="text/javascript" src="${resource(dir: 'js/noty', file: 'jquery.noty.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js/noty/themes', file: 'default.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js/noty/layouts', file: 'top.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js/noty/layouts', file: 'topLeft.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js/noty/layouts', file: 'topRight.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js/noty/layouts', file: 'topCenter.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js/noty/layouts', file: 'center.js')}"></script>
+        <script type="text/javascript" src="${resource(dir: 'js/noty/layouts', file: 'inline.js')}"></script>
+
         <script type="text/javascript">
+        var socket = {}
+        var nMessages = 0; //When this equals 30 we refresh the webpage
+        var maxMessages = 30;
+        var isRefreshing = false;
+        var timeDelay = 20000; //3 minutes = 180000 milliseconds
+        var msgDelay = 10000; //1 minute = 60000 milliseconds
+
         $(document).ready(function() {
+            /*
+            var n = noty({
+                text: '#200 Jason Heithoff Go To EE102A',
+                layout: 'topCenter'
+            });
+
+            n = noty({
+                text: 'noty - a jquery notification library!',
+                layout: 'topCenter'
+            });
+
+            window.setTimeout(function(id) {
+                $.noty.close(id);
+            }, timeDelay, n.options.id);
+
+            n = noty({
+                text: '2 noty - a jquery notification library!',
+                layout: 'topCenter'
+            });
+
+            window.setTimeout(function(id) {
+                $.noty.close(id);
+            }, timeDelay*2, n.options.id);
+
+
+            window.setTimeout(function(id) {
+                var actual_height = 0;
+                $('#noty_center_layout_container li').each(function() {
+                    actual_height += parseInt($(this).css('height'));
+                });
+
+                $('#noty_center_layout_container').css('top', ($(window).height() - actual_height) / 2 + 'px')
+            }, 1000);
+
+            $.noty.close(n.options.id);
+            */
                 // jquery.atmosphere.response
                 function callback(response) {
                     if (response.status == 200) {
+                        console.log(response.responseBody);
                         var data = response.responseBody;
-                        data = data.substr(data.indexOf('<script>'), data.length-data.indexOf('<script>')) /* strip comment buffer from Atmosphere */
-                        data = data.substr(data.indexOf('<script>parent.callback(\'')+'<script>parent.callback(\''.length, data.length-(data.indexOf('<script>')+'<script>parent.callback(\''.length))
-                        data = data.substr(0, data.length-(data.indexOf('<\script>')+13))
+                        //data = data.substr(data.indexOf('<script>'), data.length-data.indexOf('<script>')) /* strip comment buffer from Atmosphere */
+                        //data = data.substr(data.indexOf('<script>parent.callback(\'')+'<script>parent.callback(\''.length, data.length-(data.indexOf('<script>')+'<script>parent.callback(\''.length))
+                        //data = data.substr(0, data.length-(data.indexOf('<\script>')+13))
                         if (data.length > 0) {
                             try {
                                 var msgObj = jQuery.parseJSON(data);
-                                if (msgObj.id > 0) {
-                                    var row = '<tr><td>' + msgObj.id + '</td><td>' + msgObj.body + '</td><td></td></tr>'
-                                    $('tbody').append(row);
 
-                                    console.log(row);
+                                //switch message type (msgObj.type)
+                                switch(msgObj.type)     {
+                                    case 'msg.call':
+                                            callPatron(msgObj);
+                                            callTextToSpeech(msgObj);
+                                        break;
+                                    case 'msg.enqueue':
+                                        enqueuePatron(msgObj);
+                                        break;
                                 }
                             } catch (e) {
                                 // Atmosphere sends commented out data to WebKit based browsers
-                                alert(e);
+                                console.log(e);
                             }
+                            nMessages = nMessages + 1;
+                            if(nMessages > maxMessages && !isRefreshing)   {
+                                window.location.reload(true);
+                                isRefreshing = true;
+                            }
+                            socket.closeSuspendedConnection();
+                            //socket.unsubscribe();
+                            //socket.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'websocket'});
+                            //$.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
                         }
                     }
                 }
 
+            function callPatron(msgObj) {
+                try {
+                    var queueInstance = jQuery.parseJSON(msgObj.queue)
+                    var personInstance = jQuery.parseJSON(msgObj.person)
+                    var purposeInstance = jQuery.parseJSON(msgObj.purpose)
+                    if (msgObj.id > 0) {
+                        var person = queueInstance.person
+                        var rowHighlight =  ($('tbody tr').size() % 2) == 0 ? 'even'  : 'odd';
+                        var row = '<td>' + queueInstance.callNumber + '</td><td>' + personInstance.name + '</td><td>' + purposeInstance.description + '</td><td>' + queueInstance.goToRoom + '</td>'
+
+                        updatePatronListItem(queueInstance.id, row);
+                        removePatronListItem(queueInstance.id)
+
+                        var msg = noty({
+                            text: '#' + queueInstance.callNumber + ' ' + personInstance.name + ' Go To ' + queueInstance.goToRoom,
+                            layout: 'topCenter'
+                        });
+
+                        window.setTimeout(function(id) {
+                            $.noty.close(id);
+                        }, msgDelay, msg.options.id);
+
+                        //audioElement.load();
+                        //audioElement.play();
+
+
+                        console.log(row);
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                }
+
+            }
+
+            function callTextToSpeech(msgObj) {
+                try {
+                    var queueInstance = jQuery.parseJSON(msgObj.queue)
+                    var personInstance = jQuery.parseJSON(msgObj.person)
+                    var purposeInstance = jQuery.parseJSON(msgObj.purpose)
+                    if (msgObj.id > 0) {
+                        var person = queueInstance.person
+                        var rowHighlight =  ($('tbody tr').size() % 2) == 0 ? 'even'  : 'odd';
+                        var row = '<td>' + queueInstance.callNumber + '</td><td>' + personInstance.name + '</td><td>' + purposeInstance.description + '</td><td>' + queueInstance.goToRoom + '</td>'
+
+                        //audioElement.load();
+                        //audioElement.play();
+
+                        //Call Student
+                        //var googleTextToSpeechURL = 'http://translate.google.com/translate_tts?ie=UTF-8&q=Student%20number%20' + queueInstance.callNumber + '%20please%20proceed%20to%20room%20' + queueInstance.goToRoom + '&tl=en';
+                        //var googleTextToSpeechURL = 'http://translate.google.com/translate_tts?ie=UTF-8&q=Student%20number%2015%20please%20proceed%20to%20room%20102A&tl=en';
+                        var text = 'Student number ' + queueInstance.callNumber + ' please proceed to room ' + queueInstance.goToRoom
+                        var textToSpeechURL = 'http://tts-api.com/tts.mp3?q=' + encodeURI(text);
+                        var audioElement2 = document.createElement('audio');
+                        audioElement2.setAttribute('src', textToSpeechURL);
+                        audioElement2.setAttribute('autoplay', 'autoplay');
+                        audioElement2.load()
+                        //$.get();
+                        //audioElement2.addEventListener("load", function() {
+                        //    audioElement2.play();
+                        //}, true);
+
+                        //audioElement2.play();
+                        console.log(row);
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                }
+
+            }
+
+            function removePatronListItem(id) {
+                        console.log($('tbody tr[name='+id+']').html());
+                window.setTimeout(function(id) {
+                    $('tbody tr[name='+id+']').fadeOut(2000, function () {
+                        $(this).remove();
+                    });
+                }, timeDelay, id);
+                //$('tbody tr[name='+id+']').slideUp(300).delay(timeDelay).fadeOut(300).remove();
+
+
+            }
+
+            function updatePatronListItem(id, html) {
+                console.log($('tbody tr[name='+id+']').html());
+                $('tbody tr[name='+id+']').html(html);
+
+
+            }
+
+            function enqueuePatron(msgObj) {
+                try {
+                    var queueInstance = jQuery.parseJSON(msgObj.queue)
+                    var personInstance = jQuery.parseJSON(msgObj.person)
+                    var purposeInstance = jQuery.parseJSON(msgObj.purpose)
+                    if (msgObj.id > 0) {
+                        //var row = '<tr><td>' + msgObj.id + '</td><td>' + msgObj.body + '</td><td></td></tr>'
+                        var person = queueInstance.person
+                        var rowHighlight =  ($('tbody tr').last().hasClass('even') == true ? 'odd'  : 'even');
+                        var row = '<tr class="' + rowHighlight + '" name="' + queueInstance.id + '"><td>' + queueInstance.callNumber + '</td><td>' + personInstance.name + '</td><td>' + purposeInstance.description + '</td><td></td></tr>'
+                        $('tbody').append(row);
+
+                        console.log(row);
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                }
+
+            }
+
+            function soundAlert() {
+
+            }
+
                 var location = 'http://localhost:8080/reception-desk/atmosphere/messages';
-                $.atmosphere.request.callback = "cb";
-                $.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
+                socket = $.atmosphere;
+                //$.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
+                socket.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'websocket'});
+            //var socket = $.atmosphere;
+            //var request = { url: location,
+            //                contentType : "application/json",
+            //                             logLevel : 'debug',
+            //                             transport : 'websocket' ,
+            //                             fallbackTransport: 'long-polling'};
+            //request.onMessage = callback;
+
+            //var subSocket = socket.subscribe(request);
+            //subSocket.onMessage(caller);
+
+
+            var audioElement = document.createElement('audio');
+            audioElement.setAttribute('src', '${resource(dir: 'audio', file: 'chime.mp3')}');
+            //audioElement.setAttribute('autoplay', 'autoplay');
+            //audioElement.load()
+            $.get();
+            audioElement.addEventListener("load", function() {
+                audioElement.play();
+            }, true);
+
+
+            //Generated Javascript Code
+            var calledPatron = {};
+            <g:each in="${queueInstanceList}" status="i" var="queueInstance">
+                <g:if test="${queueInstance.timeCalled != null}">
+                    calledPatron = {};
+                    calledPatron.queue = '${queueInstance as grails.converters.JSON}';
+                    calledPatron.person = '<g:getPersonJSON queueInstance="${queueInstance}"></g:getPersonJSON>';
+                    calledPatron.purpose = '<g:getPurposeJSON queueInstance="${queueInstance}"></g:getPurposeJSON>';
+                    calledPatron.id = 1;
+
+                    callPatron(calledPatron);
+                </g:if>
+            </g:each>
         });
         </script>
 	</head>
@@ -56,13 +276,15 @@
 						<g:sortableColumn property="email" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
 						
 						<g:sortableColumn property="email" title="${message(code: 'queue.purpose.name.label', default: 'Purpose')}" />
+
+                        <g:sortableColumn property="goToRoom" title="${message(code: 'queue.goToRoom.name.label', default: 'Go To Room')}" />
 					
 					</tr>
 				</thead>
 				<tbody>
 				<g:set var="now" value="${new Date()}" />
 				<g:each in="${queueInstanceList}" status="i" var="queueInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}" name="${fieldValue(bean: queueInstance, field: "id")}">
 					<!-- http://user.xmission.com/~goodhill/dates/deltaDates.html -->
 					
 						<td>${fieldValue(bean: queueInstance, field: "callNumber")}</td>
@@ -70,6 +292,8 @@
 						<td>${fieldValue(bean: queueInstance, field: "person.name")}</td>
 						
 						<td>${fieldValue(bean: queueInstance, field: "purpose.description")}</td>
+
+                        <td>${fieldValue(bean: queueInstance, field: "goToRoom")}</td>
 					
 					</tr>
 				</g:each>

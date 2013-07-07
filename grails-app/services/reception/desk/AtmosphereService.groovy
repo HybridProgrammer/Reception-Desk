@@ -19,6 +19,7 @@ class AtmosphereService {
 
 		// broadcast to the atmosphere
 		broadcaster['/atmosphere/messages'].broadcast(payload)
+        log.info("broadcast: " + payload)
 
 		return null
 	}
@@ -29,6 +30,7 @@ class AtmosphereService {
 
 		// Mark this connection as suspended.
 		event.suspend()
+
 	}
 
 	def onStateChange = { event ->
@@ -37,12 +39,18 @@ class AtmosphereService {
 
 			if (event.isSuspended()) {
 				event.resource.response.writer.with {
-					write "<script>parent.callback('${event.message}');</script>"
+					//write "<script>parent.callback('${event.message}');</script>"
+                    write "${event.message}"
 					flush()
+                    log.info("writing message")
 				}
 				event.resume()
 			}
 		}
 	}
+
+    def destroy = { event ->
+        log.info("destroy function called")
+    }
    
 }

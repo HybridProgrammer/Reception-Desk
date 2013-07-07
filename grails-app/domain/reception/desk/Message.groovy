@@ -6,4 +6,8 @@ class Message {
 	
     static constraints = {
     }
+
+    static mapping = {
+        body type: "text"
+    }
 }
