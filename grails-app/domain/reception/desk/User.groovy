@@ -10,6 +10,7 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+    int refreshRate
 
 	static constraints = {
 		username blank: false, unique: true
@@ -18,6 +19,7 @@ class User {
 
 	static mapping = {
 		password column: 'passwd'
+        refreshRate defaultValue: 120000
 	}
 
 	Set<Role> getAuthorities() {

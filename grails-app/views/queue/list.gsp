@@ -6,13 +6,18 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'queue.label', default: 'Queue')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
-	</head>
+    </head>
 	<body>
 		<a href="#list-queue" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                <li>
+                    <select id='refresh-time'>
+                        <option value='120000'>Refresh every 2 minutes</option>
+                        <option value='300000'>Refresh every 5 minutes</option>
+                    </select>
+                </li>
 			</ul>
 		</div>
 		<div id="list-queue" class="content scaffold-list" role="main">

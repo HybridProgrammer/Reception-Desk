@@ -26,6 +26,19 @@ class BootStrap {
 			}
 
 		log.info "Created user admin/admin."
+
+
+        def testUser = User.findByUsername('test') ?: new User(
+                username: 'test',
+                //password: springSecurityService.encodePassword('admin'),
+                password: 'test',
+                enabled: true).save(failOnError: true)
+
+        if (!adminUser.authorities.contains(adminRole)) {
+            UserRole.create testUser, userRole
+        }
+
+        log.info "Created user test/test."
 		
 		//Load functions
 		Function.findByName('advising') ?: new Function(name: 'advising', description: 'Advising for semester classes').save(failOnError: true)

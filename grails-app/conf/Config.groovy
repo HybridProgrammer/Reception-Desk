@@ -103,5 +103,5 @@ grails.plugins.springsecurity.authority.className = 'reception.desk.Role'
 
 // Autorun Database Migrations
 grails.plugin.databasemigration.updateOnStart = true
-grails.plugin.databasemigration.updateOnStartFileNames = ['changelog-initial-2013-07-07.groovy']
+grails.plugin.databasemigration.updateOnStartFileNames = ['2013-07-08-initial.groovy']
 

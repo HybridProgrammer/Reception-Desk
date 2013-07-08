@@ -11,7 +11,9 @@ class QueueController {
 	}
 	
 	def list(Integer max) {
-		queryCurrentDayInLine(max)
+		def query = queryCurrentDayInLine(max)
+
+        [queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
 	}
 	
 	def listAll(Integer max) {
@@ -26,7 +28,9 @@ class QueueController {
 	 */
 	def lobbyList(Integer max) {
         max = 200
-		queryCurrentDayInLine(max)
+		def query = queryCurrentDayInLine(max)
+
+        [queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
 	}
 	
 	def queryCurrentDay(Integer max) {
@@ -44,7 +48,9 @@ class QueueController {
 		query = Queue.where {
 			dateCreated >= new Date().clearTime() && (isInLine == true || (hour(timeCalled) == (new Date().getHours()) && minute(timeCalled) >= (new Date().getMinutes() - 5)))
 		}
-		[queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
+
+        return query
+		//[queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
 	}
 	
 	def call(Long id) {

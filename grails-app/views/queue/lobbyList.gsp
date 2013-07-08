@@ -26,6 +26,7 @@
         var isRefreshing = false;
         var timeDelay = 20000; //3 minutes = 180000 milliseconds
         var msgDelay = 10000; //1 minute = 60000 milliseconds
+        var textToSpeechDelay = 2000;
 
         $(document).ready(function() {
             /*
@@ -80,7 +81,7 @@
                                 switch(msgObj.type)     {
                                     case 'msg.call':
                                             callPatron(msgObj);
-                                            callTextToSpeech(msgObj);
+                                            window.setTimeout(callTextToSpeech, textToSpeechDelay, msgObj);
                                         break;
                                     case 'msg.enqueue':
                                         enqueuePatron(msgObj);
@@ -125,8 +126,8 @@
                             $.noty.close(id);
                         }, msgDelay, msg.options.id);
 
-                        //audioElement.load();
-                        //audioElement.play();
+                        audioElement.load();
+                        audioElement.play();
 
 
                         console.log(row);

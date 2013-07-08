@@ -1,24 +1,29 @@
 package reception.desk
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
 
 class RoleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+    @Secured(['ROLE_ADMIN'])
     def index() {
         redirect(action: "list", params: params)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [roleInstanceList: Role.list(params), roleInstanceTotal: Role.count()]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def create() {
         [roleInstance: new Role(params)]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def save() {
         def roleInstance = new Role(params)
         if (!roleInstance.save(flush: true)) {
@@ -30,6 +35,7 @@ class RoleController {
         redirect(action: "show", id: roleInstance.id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def show(Long id) {
         def roleInstance = Role.get(id)
         if (!roleInstance) {
@@ -41,6 +47,7 @@ class RoleController {
         [roleInstance: roleInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def edit(Long id) {
         def roleInstance = Role.get(id)
         if (!roleInstance) {
@@ -52,6 +59,7 @@ class RoleController {
         [roleInstance: roleInstance]
     }
 
+    @Secured(['ROLE_ADMIN'])
     def update(Long id, Long version) {
         def roleInstance = Role.get(id)
         if (!roleInstance) {
@@ -81,6 +89,7 @@ class RoleController {
         redirect(action: "show", id: roleInstance.id)
     }
 
+    @Secured(['ROLE_ADMIN'])
     def delete(Long id) {
         def roleInstance = Role.get(id)
         if (!roleInstance) {
