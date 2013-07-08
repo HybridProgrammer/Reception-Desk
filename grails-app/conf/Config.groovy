@@ -100,6 +100,8 @@ log4j = {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'reception.desk.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'reception.desk.UserRole'
 grails.plugins.springsecurity.authority.className = 'reception.desk.Role'
+grails.plugins.springsecurity.useSecurityEventListener = true
+grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/user/room'
 
 // Autorun Database Migrations
 grails.plugin.databasemigration.updateOnStart = true

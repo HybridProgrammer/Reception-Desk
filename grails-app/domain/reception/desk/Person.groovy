@@ -9,7 +9,6 @@ class Person implements Serializable {
 		zNumber nullable: true
 		email nullable: true
 		student nullable: true
-		room nullable: true
 		majorId nullable: true
     }
 	
@@ -18,6 +17,5 @@ class Person implements Serializable {
 	String name
 	String zNumber
 	String email
-	String room
 	Long majorId
 }

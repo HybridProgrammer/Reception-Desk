@@ -18,6 +18,13 @@
 	<g:textField name="password" required="" value="${userInstance?.password}"/>
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'room', 'error')} ">
+    <label for="username">
+        <g:message code="user.room.label" default="Room" />
+    </label>
+    <g:textField name="room" value="${userInstance?.room}"/>
+</div>
+
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountExpired', 'error')} ">
 	<label for="accountExpired">
 		<g:message code="user.accountExpired.label" default="Account Expired" />

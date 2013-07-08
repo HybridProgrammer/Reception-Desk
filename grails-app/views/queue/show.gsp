@@ -20,7 +20,7 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
-			<ol class="property-list queue">
+			<ol class="property-list User">
 			
 				<g:if test="${queueInstance?.person.name}">
 				<li class="fieldcontain">

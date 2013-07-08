@@ -11,10 +11,12 @@ class User {
 	boolean accountLocked
 	boolean passwordExpired
     int refreshRate
+    String room
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+        room nullable: true
 	}
 
 	static mapping = {
