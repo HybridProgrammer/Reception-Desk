@@ -1,5 +1,6 @@
 package reception.desk
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 import grails.plugins.springsecurity.Secured
 
@@ -155,6 +156,33 @@ class UserController {
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
         redirect(action: "show", id: userInstance.id)
+    }
+
+    /**
+     * This function should be called from an ajax call
+     * @return JSON string containing a status message
+     */
+    @Secured(['IS_AUTHENTICATED_FULLY'])
+    def updateRefreshRate() {
+        def userInstance = springSecurityService.getCurrentUser()
+
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            //redirect(action: "list")
+            render "User not found"
+            return
+        }
+
+        userInstance.properties = params
+
+        if (!userInstance.save(flush: true)) {
+            //render(view: "edit", model: [userInstance: userInstance])
+            render "Unable to save refresh rate."
+            return
+        }
+
+        render "Success"
+
     }
 
     @Secured(['ROLE_ADMIN'])

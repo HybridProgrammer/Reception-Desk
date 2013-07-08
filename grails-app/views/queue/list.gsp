@@ -6,6 +6,43 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'queue.label', default: 'Queue')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
+
+        <g:javascript library="jquery" />
+        <r:require module="jquery-ui"/>
+        <atmosphere:resources/>
+
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+                var refreshDelay = $('#refresh-time').val();
+
+                var refresh = {};
+                setRefreshTimer(refreshDelay);
+
+                $('#refresh-time').live('change',function(){
+                    var select = $(this);
+                    var newVal = select.val();
+
+                    window.clearTimeout(refresh);
+                    setRefreshTimer(newVal);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "${createLink(uri: '/user/updateRefreshRate')}",
+                        data: { refreshRate: newVal }
+                    }).done(function( msg ) {
+                                console.log("Data Saved: " + msg );
+                        });
+                });
+
+                function setRefreshTimer(delay) {
+                    refresh = window.setTimeout(function() {
+                        window.location.reload(true);
+                    }, delay);
+
+                }
+            });
+        </script>
     </head>
 	<body>
 		<a href="#list-queue" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -14,8 +51,21 @@
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li>
                     <select id='refresh-time'>
-                        <option value='120000'>Refresh every 2 minutes</option>
-                        <option value='300000'>Refresh every 5 minutes</option>
+                        <g:if test="${userInstance.refreshRate == 120000}">
+                            <option value='120000' selected="selected" >Refresh every 2 minutes</option>
+                        </g:if>
+                        <g:else>
+                            <option value='120000'>Refresh every 2 minutes</option>
+                        </g:else>
+
+                        <g:if test="${userInstance.refreshRate == 300000}">
+                            <option value='300000' selected="selected">Refresh every 5 minutes</option>
+                        </g:if>
+                        <g:else>
+                            <option value='300000'>Refresh every 5 minutes</option>
+                        </g:else>
+
+
                     </select>
                 </li>
 			</ul>

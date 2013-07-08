@@ -6,6 +6,11 @@ import java.util.Date
 class QueueController {
 	def jmsService
 
+    /**
+     * Dependency injection for the springSecurityService.
+     */
+    def springSecurityService
+
     def index() { 
 		redirect(action: "lobbyList")
 	}
@@ -13,7 +18,9 @@ class QueueController {
 	def list(Integer max) {
 		def query = queryCurrentDayInLine(max)
 
-        [queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
+        def userInstance = springSecurityService.getCurrentUser()
+
+        [queueInstanceList: query.list(params), queueInstanceTotal: query.count(), userInstance: userInstance]
 	}
 	
 	def listAll(Integer max) {
