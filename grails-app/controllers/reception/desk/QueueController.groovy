@@ -41,6 +41,11 @@ class QueueController {
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
 	def list(Integer max) {
+        if(params.sort == null) {
+            //params.sort = "callNumber"
+            redirect(action: "list", params: [sort: "callNumber"])
+        }
+
 		def query = queryCurrentDayInLine(max)
 
         def userInstance = springSecurityService.getCurrentUser()
@@ -52,6 +57,11 @@ class QueueController {
 	def listAll(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
         def userInstance = springSecurityService.getCurrentUser()
+
+        if(params.sort == null) {
+            //params.sort = "callNumber"
+            redirect(action: "listAll", params: [sort: "callNumber"])
+        }
 
 
 		render(view: "list", model: [queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count(), userInstance: userInstance])
@@ -65,6 +75,7 @@ class QueueController {
 	def lobbyList(Integer max) {
         max = 200
 		def query = queryCurrentDayInLine(max)
+        params.sort = "callNumber"
 
         [queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
 	}
