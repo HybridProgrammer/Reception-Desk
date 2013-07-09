@@ -28,6 +28,8 @@ class Queue implements Serializable  {
 	
 	def getInLine() {
 		isInLine = true
+        goToRoom = null
+        owner = null
 		this.save()
 	}
 }

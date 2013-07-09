@@ -83,8 +83,15 @@ class QueueController {
 		def jsonQueue = queueInstance as JSON
 		jmsService.send(queue:'msg.call', jsonQueue.toString())
         log.info(jsonQueue)
-		
-		[queueInstance: queueInstance]
+
+        def personInstance = Person.get(queueInstance.person.id)
+        if (!personInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Queue'), id])
+            redirect(action: "index")
+            return
+        }
+
+        [queueInstance: queueInstance, personInstance: personInstance, major: Major.get(personInstance.majorId)]
 	}
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
@@ -100,7 +107,8 @@ class QueueController {
 
 		render(view: "show", model: [queueInstance: queueInstance])
 	}
-	
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
 	def inLine(Long id) {
 		def queueInstance = Queue.get(id)
 		if (!queueInstance) {
@@ -136,7 +144,7 @@ class QueueController {
             return
         }
 
-        def personInstance = Person.get(queueInstance.personId)
+        def personInstance = Person.get(queueInstance.person.id)
         if (!personInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Queue'), id])
             redirect(action: "index")
