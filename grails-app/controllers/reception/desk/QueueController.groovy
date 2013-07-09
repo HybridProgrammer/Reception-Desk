@@ -47,10 +47,14 @@ class QueueController {
 
         [queueInstanceList: query.list(params), queueInstanceTotal: query.count(), userInstance: userInstance]
 	}
-	
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
 	def listAll(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		render(view: "list", model: [queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count()])
+        def userInstance = springSecurityService.getCurrentUser()
+
+
+		render(view: "list", model: [queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count(), userInstance: userInstance])
 	}
 	
 	/**

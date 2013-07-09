@@ -29,8 +29,6 @@
 						<g:sortableColumn property="email" title="${message(code: 'person.email.label', default: 'email')}" />
 					
 						<g:sortableColumn property="zNumber" title="${message(code: 'person.zNumber.label', default: 'zNumber')}" />
-					
-						<g:sortableColumn property="room" title="${message(code: 'person.room.label', default: 'room')}" />
 						
 						<g:sortableColumn property="majorId" title="${message(code: 'person.majorId.label', default: 'major')}" />
 					
@@ -45,8 +43,6 @@
 						<td>${fieldValue(bean: personInstance, field: "email")}</td>
 						
 						<td>${fieldValue(bean: personInstance, field: "zNumber")}</td>
-						
-						<td>${fieldValue(bean: personInstance, field: "room")}</td>
 						
 						<td>${fieldValue(bean: personInstance, field: "majorId")}</td>
 					
