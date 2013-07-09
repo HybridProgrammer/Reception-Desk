@@ -48,24 +48,40 @@
 					
 				</li>
 				</g:if>
-				
-				<g:if test="${queueInstance?.person.majorId}">
-				<li class="fieldcontain">
-					<span id="majorId-label" class="property-label"><g:message code="person.majorId" default="major" /></span>
-					
-						<span class="property-value" aria-labelledby="majorId-label"><g:fieldValue bean="${queueInstance.person}" field="majorId"/></span>
-					
-				</li>
-				</g:if>
-				<g:else>
-				<li class="fieldcontain">
-					<span id="majorId-label" class="property-label">major</span>
-					
-						<span class="property-value" aria-labelledby="major-label"></span>
-					
-				</li>
-				</g:else>
-				
+
+                <g:if test="${personInstance?.majorId}">
+                    <li class="fieldcontain">
+                        <span id="majorId-label" class="property-label"><g:message code="person.majorId" default="major" /></span>
+
+                        <span class="property-value" aria-labelledby="majorId-label"><g:fieldValue bean="${major}" field="displayName"/></span>
+
+                    </li>
+                </g:if>
+                <g:else>
+                    <li class="fieldcontain">
+                        <span id="majorId-label" class="property-label">major</span>
+
+                        <span class="property-value" aria-labelledby="major-label"></span>
+
+                    </li>
+                </g:else>
+
+                <g:if test="${queueInstance?.purpose}">
+                    <li class="fieldcontain">
+                        <span id="purpose-label" class="property-label"><g:message code="purpose.description" default="purpose" /></span>
+
+                        <span class="property-value" aria-labelledby="purpose-label"><g:fieldValue bean="${queueInstance?.purpose}" field="description"/></span>
+
+                    </li>
+                </g:if>
+                <g:else>
+                    <li class="fieldcontain">
+                        <span id="purpose-label" class="property-label">major</span>
+
+                        <span class="property-value" aria-labelledby="purpose-label"></span>
+
+                    </li>
+                </g:else>
 			
 			</ol>
 			<g:form>

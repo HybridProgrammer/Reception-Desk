@@ -136,6 +136,13 @@ class QueueController {
             return
         }
 
-        [queueInstance: queueInstance]
+        def personInstance = Person.get(queueInstance.personId)
+        if (!personInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Queue'), id])
+            redirect(action: "index")
+            return
+        }
+
+        [queueInstance: queueInstance, personInstance: personInstance, major: Major.get(personInstance.majorId)]
     }
 }

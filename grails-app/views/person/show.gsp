@@ -50,23 +50,6 @@
 				</li>
 				</g:if>
 				
-				<g:if test="${personInstance?.room}">
-				<li class="fieldcontain">
-					<span id="room-label" class="property-label"><g:message code="person.room" default="room" /></span>
-					
-						<span class="property-value" aria-labelledby="room-label"><g:fieldValue bean="${personInstance}" field="room"/></span>
-					
-				</li>
-				</g:if>
-				<g:else>
-				<li class="fieldcontain">
-					<span id="room-label" class="property-label">room</span>
-					
-						<span class="property-value" aria-labelledby="room-label"></span>
-					
-				</li>
-				</g:else>
-				
 				<g:if test="${personInstance?.majorId}">
 				<li class="fieldcontain">
 					<span id="majorId-label" class="property-label"><g:message code="person.majorId" default="major" /></span>
