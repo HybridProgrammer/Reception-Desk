@@ -7,10 +7,15 @@ import reception.desk.Stats
 import reception.desk.Major
 import reception.desk.Function
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SecurityFilterPosition
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+
 class BootStrap {
 	def springSecurityService
 	
     def init = { servletContext ->
+        //SpringSecurityUtils.clientRegisterFilter('myAuthEventListener', SecurityFilterPosition.PRE_AUTH_FILTER.order + 10)
+
 		//Stuff that can be run all the time
 		def userRole = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(failOnError: true)
 		def adminRole = Role.findByAuthority('ROLE_ADMIN') ?: new Role(authority: 'ROLE_ADMIN').save(failOnError: true)

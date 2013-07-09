@@ -1,6 +1,8 @@
 package reception.desk
 
 import grails.converters.JSON
+import grails.plugins.springsecurity.Secured
+
 import java.util.Date
 
 class QueueController {
@@ -14,7 +16,8 @@ class QueueController {
     def index() { 
 		redirect(action: "lobbyList")
 	}
-	
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
 	def list(Integer max) {
 		def query = queryCurrentDayInLine(max)
 
@@ -59,7 +62,8 @@ class QueueController {
         return query
 		//[queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
 	}
-	
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
 	def call(Long id) {
 		removeFromLine(id)
 		
@@ -79,7 +83,8 @@ class QueueController {
 		
 		[queueInstance: queueInstance]
 	}
-	
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
 	def delete(Long id) {
 		def queueInstance = Queue.get(id)
 		if (!queueInstance) {
@@ -105,7 +110,8 @@ class QueueController {
 
 		render(view: "show", model: [queueInstance: queueInstance])
 	}
-	
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
 	def removeFromLine(Long id) {
 		def queueInstance = Queue.get(id)
 		
@@ -118,6 +124,7 @@ class QueueController {
 		queueInstance.getOutOfLine();
 	}
 
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def show(Long id) {
         def queueInstance = Queue.get(id)
         if (!queueInstance) {

@@ -61,7 +61,7 @@ class UserController {
         redirect(action: "show", id: userInstance.id)
     }
 
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['IS_AUTHENTICATED_FULLY'])
     def show(Long id) {
         def userInstance = User.get(id)
         if (!userInstance) {

@@ -14,6 +14,7 @@ class MyAuthEventListener implements ApplicationListener<AuthenticationSuccessEv
 
     void onApplicationEvent(AuthenticationSuccessEvent event) {
         // handle the event
+        //throw new org.springframework.security.access.AccessDeniedException("Cell Phone Number not verified")
 
     }
 }
