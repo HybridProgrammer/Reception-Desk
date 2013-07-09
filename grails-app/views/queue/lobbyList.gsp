@@ -155,7 +155,7 @@
                         //Call Student
                         //var googleTextToSpeechURL = 'http://translate.google.com/translate_tts?ie=UTF-8&q=Student%20number%20' + queueInstance.callNumber + '%20please%20proceed%20to%20room%20' + queueInstance.goToRoom + '&tl=en';
                         //var googleTextToSpeechURL = 'http://translate.google.com/translate_tts?ie=UTF-8&q=Student%20number%2015%20please%20proceed%20to%20room%20102A&tl=en';
-                        var text = 'Student number ' + queueInstance.callNumber + ' please proceed to room ' + queueInstance.goToRoom
+                        var text = 'Student number ' + queueInstance.callNumber + ' please proceed to ' + queueInstance.goToRoom
                         var textToSpeechURL = 'http://tts-api.com/tts.mp3?q=' + encodeURI(text);
                         var audioElement2 = document.createElement('audio');
                         audioElement2.setAttribute('src', textToSpeechURL);

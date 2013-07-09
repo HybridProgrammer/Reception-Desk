@@ -33,4 +33,10 @@ class QueueTagLib {
         out << body() << (f as JSON).toString();
     }
 
+    def workingWith = { attrs, body ->
+        Queue queueInstance = attrs.queueInstance
+
+        out << body() << "Somebody";
+    }
+
 }

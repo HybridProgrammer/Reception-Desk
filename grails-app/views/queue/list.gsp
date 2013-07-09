@@ -83,13 +83,13 @@
 					
 						<g:sortableColumn property="callNumber" title="${message(code: 'queue.callNumber.label', default: '#')}" />
 											
-						<g:sortableColumn property="name" title="${message(code: 'queue.dateCreated.label', default: 'Wait Time')}" />
+						<g:sortableColumn property="waitTime" title="${message(code: 'queue.dateCreated.label', default: 'Wait Time')}" />
 					
-						<g:sortableColumn property="email" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
+						<g:sortableColumn property="name" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
 						
-						<g:sortableColumn property="email" title="${message(code: 'queue.purpose.name.label', default: 'Purpose')}" />
+						<g:sortableColumn property="purpose" title="${message(code: 'queue.purpose.name.label', default: 'Purpose')}" />
 						
-						<g:sortableColumn property="email" title="${message(code: 'queue.dateCreated.label', default: 'Date Created')}" />
+						<g:sortableColumn property="workingWith" title="${message(code: 'queue.dateCreated.label', default: 'Working With')}" />
 					
 					</tr>
 				</thead>
@@ -101,6 +101,7 @@
 
 						<td>
                         <g:if test='${queueInstance.inLine} == true' ><g:link class="call" action="call" id="${queueInstance.id}"><g:message code="default.button.call.label" default="Call" /></g:link> | </g:if>
+                        <g:else></g:else>
                         <g:link class="view" action="show" id="${queueInstance.id}"><g:message code="default.button.view.label" default="View" /></g:link>
                     </td>
 						
@@ -111,8 +112,8 @@
 						<td>${fieldValue(bean: queueInstance, field: "person.name")}</td>
 						
 						<td>${fieldValue(bean: queueInstance, field: "purpose.description")}</td>
-						
-						<td>${fieldValue(bean: queueInstance, field: "dateCreated")}</td>
+
+                        <td><g:workingWith queueInstance="${queueInstance}"></g:workingWith></td>
 					
 					</tr>
 				</g:each>

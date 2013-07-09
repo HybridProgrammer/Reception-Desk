@@ -66,6 +66,7 @@ class QueueController {
     @Secured(['IS_AUTHENTICATED_FULLY'])
 	def call(Long id) {
 		removeFromLine(id)
+        def userInstance = springSecurityService.getCurrentUser()
 		
 		def queueInstance = Queue.get(id)
 		if (!queueInstance) {
@@ -74,7 +75,8 @@ class QueueController {
 			return
 		}
         queueInstance.setTimeCalled( new Date())
-        queueInstance.setGoToRoom("T-EE102A")
+        queueInstance.setGoToRoom(((User)userInstance).getRoom())
+
         def save = queueInstance.save()
 
 		def jsonQueue = queueInstance as JSON
