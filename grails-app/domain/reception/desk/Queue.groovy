@@ -7,6 +7,7 @@ class Queue implements Serializable  {
     static constraints = {
         goToRoom nullable: true
         timeCalled nullable: true
+        owner nullable: true
     }
 	
 	Date dateCreated
@@ -15,6 +16,7 @@ class Queue implements Serializable  {
 	Boolean isInLine
 	Integer callNumber
     String goToRoom
+    User owner
 	
 	Person person
 	Function purpose
