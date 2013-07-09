@@ -24,47 +24,15 @@
         var nMessages = 0; //When this equals 30 we refresh the webpage
         var maxMessages = 30;
         var isRefreshing = false;
-        var timeDelay = 20000; //3 minutes = 180000 milliseconds
-        var msgDelay = 10000; //1 minute = 60000 milliseconds
+        var timeDelay = 0; //3 minutes = 180000 milliseconds
+        var msgDelay = 0; //1 minute = 60000 milliseconds
         var textToSpeechDelay = 2000;
+        var removePatronTimerArr = new Array(); //Contains a list of all listed items that are scheduled to be removed
+        var removePatronMsgTimerArr = new Array(); //Contains a list of all messages that are scheduled to be removed
+        var notyMsgArr = new Array(); //Contains a list of all messages that are scheduled to be removed
 
         $(document).ready(function() {
-            /*
-            var n = noty({
-                text: '#200 Jason Heithoff Go To EE102A',
-                layout: 'topCenter'
-            });
 
-            n = noty({
-                text: 'noty - a jquery notification library!',
-                layout: 'topCenter'
-            });
-
-            window.setTimeout(function(id) {
-                $.noty.close(id);
-            }, timeDelay, n.options.id);
-
-            n = noty({
-                text: '2 noty - a jquery notification library!',
-                layout: 'topCenter'
-            });
-
-            window.setTimeout(function(id) {
-                $.noty.close(id);
-            }, timeDelay*2, n.options.id);
-
-
-            window.setTimeout(function(id) {
-                var actual_height = 0;
-                $('#noty_center_layout_container li').each(function() {
-                    actual_height += parseInt($(this).css('height'));
-                });
-
-                $('#noty_center_layout_container').css('top', ($(window).height() - actual_height) / 2 + 'px')
-            }, 1000);
-
-            $.noty.close(n.options.id);
-            */
                 // jquery.atmosphere.response
                 function callback(response) {
                     if (response.status == 200) {
@@ -85,6 +53,10 @@
                                         break;
                                     case 'msg.enqueue':
                                         enqueuePatron(msgObj);
+                                        break;
+                                    case 'msg.inLine':
+                                        inLinePatron(msgObj);
+                                        window.setTimeout(inLineTextToSpeech, textToSpeechDelay, msgObj);
                                         break;
                                 }
                             } catch (e) {
@@ -122,9 +94,55 @@
                             layout: 'topCenter'
                         });
 
-                        window.setTimeout(function(id) {
+                        notyMsgArr[queueInstance.id] = msg.options.id
+
+                        removePatronMsgTimerArr[queueInstance.id] = window.setTimeout(function(id) {
                             $.noty.close(id);
                         }, msgDelay, msg.options.id);
+
+                        audioElement.load();
+                        audioElement.play();
+
+
+                        console.log(row);
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                }
+
+            }
+
+            function inLinePatron(msgObj) {
+                try {
+                    var queueInstance = jQuery.parseJSON(msgObj.queue)
+                    var personInstance = jQuery.parseJSON(msgObj.person)
+                    var purposeInstance = jQuery.parseJSON(msgObj.purpose)
+                    if (msgObj.id > 0) {
+                        var person = queueInstance.person
+                        var rowHighlight =  ($('tbody tr').size() % 2) == 0 ? 'even'  : 'odd';
+                        var row = '<td>' + queueInstance.callNumber + '</td><td>' + personInstance.name + '</td><td>' + purposeInstance.description + '</td><td></td>'
+
+                        $.noty.close(notyMsgArr[queueInstance.id])
+
+                        //Check if row still exists
+                        var rowItem = $('tbody tr[name="' + queueInstance.id  + '"]')
+                        if(rowItem.length > 0) {
+                            rowItem.html(row)
+                        }
+                        else { //Row doesn't exist. We need to now reinsert it into the proper location
+                            row = '<tr name="' + queueInstance.id + '">' + row + '</tr>';
+                            $('tbody tr').each(function(index){
+                                if(parseInt($(this).attr("name")) > queueInstance.id) {  //We should insert above this row
+                                    var parent = $(this).before(row);
+                                    return false;
+                                }
+                            });
+
+                        }
+
+                        window.clearTimeout(removePatronTimerArr[queueInstance.id])
+                        window.clearTimeout(removePatronMsgTimerArr[queueInstance.id])
 
                         audioElement.load();
                         audioElement.play();
@@ -176,9 +194,35 @@
 
             }
 
+            function inLineTextToSpeech(msgObj) {
+                try {
+                    var queueInstance = jQuery.parseJSON(msgObj.queue)
+                    var personInstance = jQuery.parseJSON(msgObj.person)
+                    var purposeInstance = jQuery.parseJSON(msgObj.purpose)
+                    if (msgObj.id > 0) {
+                        var person = queueInstance.person
+                        var rowHighlight =  ($('tbody tr').size() % 2) == 0 ? 'even'  : 'odd';
+                        var row = '<td>' + queueInstance.callNumber + '</td><td>' + personInstance.name + '</td><td>' + purposeInstance.description + '</td><td>' + queueInstance.goToRoom + '</td>';
+
+                        var text = 'Student number ' + queueInstance.callNumber + ' please return to the waiting room.';
+                        var textToSpeechURL = 'http://tts-api.com/tts.mp3?q=' + encodeURI(text);
+                        var audioElement2 = document.createElement('audio');
+                        audioElement2.setAttribute('src', textToSpeechURL);
+                        audioElement2.setAttribute('autoplay', 'autoplay');
+                        audioElement2.load()
+
+                        console.log(row);
+                    }
+                }
+                catch (e) {
+                    console.log(e);
+                }
+
+            }
+
             function removePatronListItem(id) {
                         console.log($('tbody tr[name='+id+']').html());
-                window.setTimeout(function(id) {
+                removePatronTimerArr[id] = window.setTimeout(function(id) {
                     $('tbody tr[name='+id+']').fadeOut(2000, function () {
                         $(this).remove();
                     });

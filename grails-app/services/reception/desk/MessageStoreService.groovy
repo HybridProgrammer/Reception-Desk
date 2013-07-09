@@ -48,6 +48,26 @@ class MessageStoreService {
         return null
     }
 
+    @grails.plugin.jms.Queue(name='msg.inLine')
+    def inLineMessage(msg) {
+
+        def messageInstance = new Message(body:msg)
+        def o = JSON.parse(messageInstance.body)
+        def personJSON = (Person.get(o.person.id) as JSON).toString()
+        def purposeJSON = (Function.get(o.purpose.id) as JSON).toString()
+        if (messageInstance.save(flush: true)) {
+            log.info "Saved message: id = ${messageInstance.id}"
+
+            // publish an event
+            jmsService.send(topic:'msgevent', [id:messageInstance.id, type:"msg.inLine", queue:messageInstance.body, person:personJSON, purpose:purposeJSON])
+        } else {
+            log.warn 'Could not save message'
+        }
+
+        // explicitly return null to prevent unwanted replyTo queue attempt
+        return null
+    }
+
     @grails.plugin.jms.Queue(name='msg.enqueue')
     def enqueueMessage(msg) {
 

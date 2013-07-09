@@ -141,6 +141,10 @@ class QueueController {
 		
 		queueInstance.getInLine()
 
+        def jsonQueue = queueInstance as JSON
+        jmsService.send(queue:'msg.inLine', jsonQueue.toString())
+        log.info(jsonQueue)
+
 		render(view: "show", model: [queueInstance: queueInstance])
 	}
 
