@@ -63,6 +63,7 @@
                                 // Atmosphere sends commented out data to WebKit based browsers
                                 console.log(e);
                             }
+                            fixRowHighlighting()
                             nMessages = nMessages + 1;
                             if(nMessages > maxMessages && !isRefreshing)   {
                                 window.location.reload(true);
@@ -75,6 +76,14 @@
                         }
                     }
                 }
+
+
+            function fixRowHighlighting() {
+                $('tbody tr').each(function(index){
+                    var rowHighlight =  (index % 2) == 0 ? 'even'  : 'odd';
+                    $(this).removeClass().addClass(rowHighlight);
+                });
+            }
 
             function callPatron(msgObj) {
                 try {
