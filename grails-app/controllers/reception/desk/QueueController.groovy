@@ -6,6 +6,8 @@ import grails.plugins.springsecurity.Secured
 import java.util.Date
 
 class QueueController {
+    //static scaffold = true;
+
 	def jmsService
 
     /**
@@ -16,6 +18,26 @@ class QueueController {
     def index() { 
 		redirect(action: "lobbyList")
 	}
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
+    def edit(Long id) {
+        def queueInstance = Queue.get(id)
+        if (!queueInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Queue'), id])
+            redirect(action: "list")
+            return
+        }
+
+        def personInstance = Person.get(queueInstance.person.id)
+        if (!personInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), id])
+            redirect(action: "list")
+            return
+        }
+
+
+        [queueInstance: queueInstance, personInstance: personInstance, major: Major.list(), purpose: Function.list()]
+    }
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
 	def list(Integer max) {
@@ -121,6 +143,62 @@ class QueueController {
 
 		render(view: "show", model: [queueInstance: queueInstance])
 	}
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
+    def update(Long id, Long version) {
+        def personInstance
+        def queueInstance = Queue.get(id)
+        if (!queueInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'queue.label', default: 'Queue'), id])
+            redirect(action: "list")
+            return
+        }
+
+        if (version != null) {
+            if (queueInstance.version > version) {
+                queueInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'queue.label', default: 'Queue')] as Object[],
+                        "Another user has updated this User while you were editing")
+
+                personInstance = Person.get(queueInstance.person.id)
+                if (!personInstance) {
+                    flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), id])
+                    redirect(action: "list")
+                    return
+                }
+
+                render(view: "edit", model: [queueInstance: queueInstance, personInstance: personInstance, major: Major.list(), purpose: Function.list()])
+                return
+            }
+        }
+
+        queueInstance.properties = params.queue
+        queueInstance.purpose = Function.get(params.purposeId)
+        personInstance = Person.get(queueInstance.person.id)
+        personInstance.properties = params.person
+
+
+        if (!queueInstance.save(flush: true)) {
+            personInstance = Person.get(queueInstance.person.id)
+            if (!personInstance) {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), id])
+                redirect(action: "list")
+                return
+            }
+
+            render(view: "edit", model: [queueInstance: queueInstance, personInstance: personInstance, major: Major.list(), purpose: Function.list()])
+            return
+        }
+
+        if (!personInstance.save(flush: true)) {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'person.label', default: 'Person'), id])
+                render(view: "edit", model: [queueInstance: queueInstance, personInstance: personInstance, major: Major.list(), purpose: Function.list()])
+                return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])
+        redirect(action: "list")
+    }
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
 	def removeFromLine(Long id) {

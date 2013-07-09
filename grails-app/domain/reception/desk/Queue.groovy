@@ -30,6 +30,7 @@ class Queue implements Serializable  {
 		isInLine = true
         goToRoom = null
         owner = null
+        timeCalled = null
 		this.save()
 	}
 }

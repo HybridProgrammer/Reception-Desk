@@ -24,7 +24,7 @@
 			<g:form>
 				<fieldset class="buttons">
 					<g:hiddenField name="id" value="${queueInstance?.id}" />
-					<g:link class="edit" controller="Person" action="edit" id="${queueInstance?.person.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:link class="edit" controller="Queue" action="edit" id="${queueInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 					<g:link class="button call" controller="Queue" action="call" id="${queueInstance?.id}"><g:message code="default.button.call.label" default="Call" /></g:link>
 				</fieldset>
 			</g:form>
