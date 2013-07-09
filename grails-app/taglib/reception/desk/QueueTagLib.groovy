@@ -35,8 +35,13 @@ class QueueTagLib {
 
     def workingWith = { attrs, body ->
         Queue queueInstance = attrs.queueInstance
+        def text = ""
 
-        out << body() << "Somebody";
+        if(queueInstance.owner != null) {
+            text = queueInstance.owner.username.toString()
+        }
+
+        out << body() << text;
     }
 
 }

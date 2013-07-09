@@ -100,8 +100,8 @@
 					<!-- http://user.xmission.com/~goodhill/dates/deltaDates.html -->
 
 						<td>
-                        <g:if test='${queueInstance.inLine} == true' ><g:link class="call" action="call" id="${queueInstance.id}"><g:message code="default.button.call.label" default="Call" /></g:link> | </g:if>
-                        <g:else></g:else>
+                        <g:if test="${queueInstance?.isInLine}" ><g:link class="call" action="call" id="${queueInstance.id}"><g:message code="default.button.call.label" default="Call" /></g:link> | </g:if>
+                        <g:else><g:link class="inLine button" controller="Queue" action="inLine" id="${queueInstance?.id}"><g:message code="default.button.inLine.label" default="In Line" /></g:link> | </g:else>
                         <g:link class="view" action="show" id="${queueInstance.id}"><g:message code="default.button.view.label" default="View" /></g:link>
                     </td>
 						

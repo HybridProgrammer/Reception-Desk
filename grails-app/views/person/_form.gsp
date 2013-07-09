@@ -27,14 +27,6 @@
 	<g:textField name="zNumber" required="" value="${personInstance?.zNumber}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: personInstance, field: 'room', 'error')} required">
-	<label for="room">
-		<g:message code="person.room.label" default="room" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:textField name="room" required="" value="${personInstance?.room}"/>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: personInstance, field: 'majorId', 'error')} ">
 	<label for="majorId">
 		<g:message code="person.majorId.label" default="major" />

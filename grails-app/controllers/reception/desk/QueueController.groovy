@@ -76,6 +76,7 @@ class QueueController {
 		}
         queueInstance.setTimeCalled( new Date())
         queueInstance.setGoToRoom(((User)userInstance).getRoom())
+        queueInstance.setOwner(((User)userInstance))
 
         def save = queueInstance.save()
 
