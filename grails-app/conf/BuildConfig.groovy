@@ -86,7 +86,7 @@ grails.project.dependency.resolution = {
 		compile ":spring-security-core:1.2.7.3" 
 		//compile ":spring-security-ldap:1.0.6"
 		
-		build ':jbossas:1.0'
+		//build ':jbossas:1.0'
 		
 		compile ":famfamfam:1.0.1"
 		

@@ -72,7 +72,7 @@
 		<a href="#list-function" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
 		<div id="list-function" class="content scaffold-list" role="main">
-			<h1>How may I help you?</h1>
+			<h1>The reason for your visit:</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
