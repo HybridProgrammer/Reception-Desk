@@ -102,8 +102,15 @@ class QueueController {
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
 	def call(Long id) {
-		removeFromLine(id)
         def userInstance = springSecurityService.getCurrentUser()
+        //Check that this user has a room assigned to him/her
+        //  If this is this person's first call for the day. Force them to verify their current room situation
+        if(((User)userInstance).isRoomEmpty() || getNumberOfCallsByUser(((User)userInstance).id) <= 0) {
+            redirect(controller: 'user', action: 'room')
+            return
+        }
+
+		removeFromLine(id)
 		
 		def queueInstance = Queue.get(id)
 		if (!queueInstance) {
@@ -130,6 +137,17 @@ class QueueController {
 
         [queueInstance: queueInstance, personInstance: personInstance, major: Major.get(personInstance.majorId)]
 	}
+
+    private def getNumberOfCallsByUser(Long id) {
+        def query = Queue.findByDateCreatedGreaterThanEqualsAndOwner(new Date().clearTime(), User.get(id))
+        def count = 0
+
+        if(query != null) {
+            count = query.count()
+        }
+
+        return count
+    }
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
 	def delete(Long id) {

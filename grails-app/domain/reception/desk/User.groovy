@@ -41,4 +41,15 @@ class User {
 	protected void encodePassword() {
 		password = springSecurityService.encodePassword(password)
 	}
+
+    def isRoomEmpty() {
+        if(getRoom() == null || getRoom() == "") {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+        return true; //Shouldn't get here but if it does assume its not set
+    }
 }

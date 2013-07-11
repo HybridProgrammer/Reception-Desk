@@ -24,8 +24,8 @@
         var nMessages = 0; //When this equals 30 we refresh the webpage
         var maxMessages = 30;
         var isRefreshing = false;
-        var timeDelay = 0; //3 minutes = 180000 milliseconds
-        var msgDelay = 0; //1 minute = 60000 milliseconds
+        var timeDelay = 180000; //3 minutes = 180000 milliseconds
+        var msgDelay = 60000; //1 minute = 60000 milliseconds
         var textToSpeechDelay = 2000;
         var removePatronTimerArr = new Array(); //Contains a list of all listed items that are scheduled to be removed
         var removePatronMsgTimerArr = new Array(); //Contains a list of all messages that are scheduled to be removed
