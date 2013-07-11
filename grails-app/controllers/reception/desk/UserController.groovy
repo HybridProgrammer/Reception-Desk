@@ -150,6 +150,7 @@ class UserController {
         }
 
         userInstance.properties = params
+        userInstance.setRoomLastUpdated(new Date())
 
         if (!userInstance.save(flush: true)) {
             render(view: "edit", model: [userInstance: userInstance])

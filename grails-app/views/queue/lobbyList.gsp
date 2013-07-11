@@ -273,7 +273,7 @@
 
             }
 
-                var location = 'http://localhost:8080/reception-desk/atmosphere/messages';
+                var location = '${createLink(uri: '/atmosphere/messages', absolute: "true")}';   //'http://localhost:8080/reception-desk/atmosphere/messages';
                 socket = $.atmosphere;
                 //$.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
                 socket.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'websocket'});
