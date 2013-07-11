@@ -14,6 +14,7 @@ class PatronController {
 	
 	def showMenu(Integer max) {
 		params.max = Math.min(max ?: 25, 100)
+        params.sort = "description"
 		[functionInstanceList: Function.list(params), functionInstanceTotal: Function.count()]
 	}
 	
@@ -35,17 +36,42 @@ class PatronController {
 			on("advising"){
 				[major: Major.list()]
 			}.to "getPatronInformation"		//Advising for semester classes
-			on("permNHolds").to "enterWaitQueue"			//Permission/Holds Removed
-			on("changeMajor").to "enterWaitQueue"			//Change of Major
-			on("graduation").to "enterWaitQueue"			//Graduation Applications/Issues
-			on("dl").to "enterWaitQueue"					//Distance Learning
-			on("petitions").to "enterWaitQueue"				//Petitions
-			on("buildingTour").to "enterWaitQueue"			//Building Tour
-			on("questionCollege").to "enterWaitQueue"		//General Information on our College
-			on("scolarships").to "enterWaitQueue"			//Scholarships
-			on("programs").to "enterWaitQueue"				//Dual Enrollment/Summer Programs
-			on("other").to "enterWaitQueue"					//Other
-			on("viewPersons").to"displayPersons"
+            on("preProf"){
+                [major: Major.list()]
+            }.to "getPatronInformation"     //Pre-Professional Engineering
+            on("tutoring"){
+                [major: Major.list()]
+            }.to "getPatronInformation"     //Tutoring
+			on("permNHolds"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Permission/Holds Removed
+			on("changeMajor"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Change of Major
+			on("graduation"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Graduation Applications/Issues
+			on("dl"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Distance Learning
+			on("petitions"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Petitions
+			on("buildingTour"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Building Tour
+			on("questionCollege"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//General Information on our College
+			on("scolarships"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Scholarships
+			on("programs"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Dual Enrollment/Summer Programs
+			on("other"){
+                [major: Major.list()]
+            }.to "getPatronInformation"		//Other
 		}
 		
 		getPatronInformation {

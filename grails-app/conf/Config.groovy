@@ -102,6 +102,15 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'reception.des
 grails.plugins.springsecurity.authority.className = 'reception.desk.Role'
 grails.plugins.springsecurity.useSecurityEventListener = true
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/user/room'
+grails.plugins.springsecurity.interceptUrlMap = [
+        '/function/*':          ['ROLE_ADMIN'],
+        '/dbdoc/*':             ['ROLE_ADMIN'],
+        '/displayClient/*':     ['ROLE_ADMIN'],
+        '/person/*':            ['ROLE_ADMIN'],
+        '/testing/*':           ['ROLE_ADMIN'],
+        '/**':                  ['IS_AUTHENTICATED_ANONYMOUSLY']
+]
+
 
 // Autorun Database Migrations
 grails.plugin.databasemigration.updateOnStart = true

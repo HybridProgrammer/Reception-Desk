@@ -47,6 +47,8 @@ class BootStrap {
 		
 		//Load functions
 		Function.findByName('advising') ?: new Function(name: 'advising', description: 'Advising for semester classes').save(failOnError: true)
+        Function.findByName('tutoring') ?: new Function(name: 'tutoring', description: 'Tutoring').save(failOnError: true)
+        Function.findByName('preProf') ?: new Function(name: 'preProf', description: 'Advising for Pre-Professional Engineering').save(failOnError: true)
 		Function.findByName('permNHolds') ?: new Function(name: 'permNHolds', description: 'Permission/Holds Removed').save(failOnError: true)
 		Function.findByName('changeMajor') ?: new Function(name: 'changeMajor', description: 'Change of Major').save(failOnError: true)
 		Function.findByName('graduation') ?: new Function(name: 'graduation', description: 'Graduation Applications/Issues').save(failOnError: true)
