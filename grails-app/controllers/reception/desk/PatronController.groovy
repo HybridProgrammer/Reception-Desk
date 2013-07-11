@@ -34,43 +34,43 @@ class PatronController {
 			}
 			on("success").to "displayMenu"	
 			on("advising"){
-				[major: Major.list()]
+				[major: Major.list(sort: 'displayName')]
 			}.to "getPatronInformation"		//Advising for semester classes
             on("preProf"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"     //Pre-Professional Engineering
             on("tutoring"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"     //Tutoring
 			on("permNHolds"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Permission/Holds Removed
 			on("changeMajor"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Change of Major
 			on("graduation"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Graduation Applications/Issues
 			on("dl"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Distance Learning
 			on("petitions"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Petitions
 			on("buildingTour"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Building Tour
 			on("questionCollege"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//General Information on our College
 			on("scolarships"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Scholarships
 			on("programs"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Dual Enrollment/Summer Programs
 			on("other"){
-                [major: Major.list()]
+                [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Other
 		}
 		

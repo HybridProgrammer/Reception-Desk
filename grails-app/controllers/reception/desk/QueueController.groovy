@@ -36,7 +36,7 @@ class QueueController {
         }
 
 
-        [queueInstance: queueInstance, personInstance: personInstance, major: Major.list(), purpose: Function.list()]
+        [queueInstance: queueInstance, personInstance: personInstance, major: Major.list(sort: 'displayName'), purpose: Function.list(sort: 'description')]
     }
 
     @Secured(['IS_AUTHENTICATED_FULLY'])
