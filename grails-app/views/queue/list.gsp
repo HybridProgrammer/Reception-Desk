@@ -50,7 +50,7 @@
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-                <li><g:link class="all" action="listAll"><g:message code="default.all.label" default="Show All"/></g:link></li>
+                <li><g:link class="all" action="listAllDay"><g:message code="default.all.label" default="Show All"/></g:link></li>
                 <li>
                     <select id='refresh-time'>
                         <g:if test="${userInstance.refreshRate == 120000}">
@@ -85,7 +85,7 @@
 					
 						<g:sortableColumn property="callNumber" title="${message(code: 'queue.callNumber.label', default: '#')}" />
 											
-						<g:sortableColumn property="waitTime" title="${message(code: 'queue.dateCreated.label', default: 'Wait Time')}" />
+						<g:sortableColumn property="dateCreated" title="${message(code: 'queue.dateCreated.label', default: 'Wait Time')}" />
 					
 						<g:sortableColumn property="name" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
 						

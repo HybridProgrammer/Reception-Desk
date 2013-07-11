@@ -43,7 +43,7 @@ class QueueController {
 	def list(Integer max) {
         if(params.sort == null) {
             //params.sort = "callNumber"
-            redirect(action: "list", params: [sort: "callNumber"])
+            redirect(action: "list", params: [sort: "dateCreated"])
         }
 
 		def query = queryCurrentDayInLine(max)
@@ -60,12 +60,29 @@ class QueueController {
 
         if(params.sort == null) {
             //params.sort = "callNumber"
-            redirect(action: "listAll", params: [sort: "callNumber"])
+            redirect(action: "listAll", params: [sort: "dateCreated", order: "desc"])
         }
 
 
 		render(view: "list", model: [queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count(), userInstance: userInstance])
 	}
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
+    def listAllDay(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+
+        if(params.sort == null) {
+            //params.sort = "callNumber"
+            redirect(action: "listAllDay", params: [sort: "dateCreated"])
+        }
+
+
+        def query = queryCurrentDay(max)
+
+        def userInstance = springSecurityService.getCurrentUser()
+
+        render(view: "list", model: [queueInstanceList: query.list(params), queueInstanceTotal: query.count(), userInstance: userInstance])
+    }
 	
 	/**
 	 * The Queue list only shows entries from the current day
@@ -82,11 +99,10 @@ class QueueController {
 	
 	def queryCurrentDay(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
-		def query = Queue.findByDateCreatedGreaterThanEquals(new Date().clearTime())
-		query = Queue.where {
+		def query = Queue.where {
 			dateCreated >= new Date().clearTime()
 		}
-		[queueInstanceList: query.list(params), queueInstanceTotal: query.count()]
+		return query
 	}
 	
 	def queryCurrentDayInLine(Integer max) {
