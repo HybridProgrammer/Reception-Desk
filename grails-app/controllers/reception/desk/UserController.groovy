@@ -52,6 +52,7 @@ class UserController {
     @Secured(['ROLE_ADMIN'])
     def save() {
         def userInstance = new User(params)
+        userInstance.setRoomLastUpdated(new Date())
         if (!userInstance.save(flush: true)) {
             render(view: "create", model: [userInstance: userInstance])
             return
@@ -105,6 +106,7 @@ class UserController {
         }
 
         userInstance.properties = params
+        userInstance.setRoomLastUpdated(new Date())
 
         if (!userInstance.save(flush: true)) {
             render(view: "edit", model: [userInstance: userInstance])

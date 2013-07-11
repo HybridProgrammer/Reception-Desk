@@ -346,4 +346,5 @@ databaseChangeLog = {
     include file: '2013-07-08-drop-test-to-user.groovy'
     include file: '2013-07-09-add-owner-field-to-queue.groovy'
     include file: '2013-07-11-add-shortDescription-to-Function.groovy'
+    include file: '2013-07-11-add-roomLastUpdated-to-User.groovy'
 }

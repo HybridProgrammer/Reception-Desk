@@ -12,11 +12,13 @@ class User {
 	boolean passwordExpired
     int refreshRate
     String room
+    Date roomLastUpdated
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
         room nullable: true
+        roomLastUpdated nullable: true
 	}
 
 	static mapping = {
@@ -51,5 +53,17 @@ class User {
         }
 
         return true; //Shouldn't get here but if it does assume its not set
+    }
+
+    def hasRoomBeenUpdatedToday() {
+        if(isRoomEmpty()){
+            return false
+        }
+
+        if(roomLastUpdated >= (new Date().clearTime())) {
+            return true
+        }
+
+        return false;
     }
 }
