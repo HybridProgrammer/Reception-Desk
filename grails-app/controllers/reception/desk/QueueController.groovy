@@ -121,7 +121,7 @@ class QueueController {
         def userInstance = springSecurityService.getCurrentUser()
         //Check that this user has a room assigned to him/her
         //  If this is this person's first call for the day. Force them to verify their current room situation
-        if(((User)userInstance).hasRoomBeenUpdatedToday()) {
+        if(((User)userInstance).hasRoomBeenUpdatedToday() == false) {
             redirect(controller: 'user', action: 'room')
             return
         }

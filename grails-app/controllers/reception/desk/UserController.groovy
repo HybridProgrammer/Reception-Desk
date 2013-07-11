@@ -106,7 +106,10 @@ class UserController {
         }
 
         userInstance.properties = params
-        userInstance.setRoomLastUpdated(new Date())
+        if(userInstance.room != null && userInstance.room != "") {
+            userInstance.setRoomLastUpdated(new Date())
+        }
+
 
         if (!userInstance.save(flush: true)) {
             render(view: "edit", model: [userInstance: userInstance])
@@ -150,7 +153,9 @@ class UserController {
         }
 
         userInstance.properties = params
-        userInstance.setRoomLastUpdated(new Date())
+        if(userInstance.room != null && userInstance.room != "") {
+            userInstance.setRoomLastUpdated(new Date())
+        }
 
         if (!userInstance.save(flush: true)) {
             render(view: "edit", model: [userInstance: userInstance])
