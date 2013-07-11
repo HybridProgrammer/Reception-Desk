@@ -65,3 +65,10 @@
     />
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: queueInstance, field: 'additionalInformation', 'error')} ">
+    <label for="additionalInformaiton">
+        <g:message code="additionalInformation.label" default="Additional Information" />
+    </label>
+    <g:textArea name="additionalInformation" value="${queueInstance?.additionalInformation}" rows="5" cols="40"/>
+</div>
+

@@ -95,7 +95,7 @@ class PatronController {
 				log.info "Count of Person Table: " + list
 				
 				//Add user to wait queue
-				def queueInstance = new Queue(isInLine: true, person: personInstance, purpose: flow.purpose, callNumber: CallNumber.getNext())
+				def queueInstance = new Queue(isInLine: true, person: personInstance, purpose: flow.purpose, callNumber: CallNumber.getNext(), additionalInformation: params.additionalInformation)
 				if (!queueInstance.save(flush: true)) {
 					//render(view: "create", model: [personInstance: personInstance])
 					return

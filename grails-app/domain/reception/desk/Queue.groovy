@@ -8,6 +8,11 @@ class Queue implements Serializable  {
         goToRoom nullable: true
         timeCalled nullable: true
         owner nullable: true
+        additionalInformation nullable: true
+    }
+
+    static mapping = {
+        additionalInformation type: "text"
     }
 	
 	Date dateCreated
@@ -16,6 +21,7 @@ class Queue implements Serializable  {
 	Boolean isInLine
 	Integer callNumber
     String goToRoom
+    String additionalInformation
     User owner
 	
 	Person person

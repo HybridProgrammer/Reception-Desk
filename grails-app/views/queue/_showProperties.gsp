@@ -1,4 +1,4 @@
-<ol class="property-list queue">
+<ol class="property-list queue" xmlns="http://www.w3.org/1999/html">
 
     <g:if test="${queueInstance?.callNumber}">
         <li class="fieldcontain">
@@ -64,6 +64,23 @@
     <g:else>
         <li class="fieldcontain">
             <span id="purpose-label" class="property-label">major</span>
+
+            <span class="property-value" aria-labelledby="purpose-label"></span>
+
+        </li>
+    </g:else>
+
+    <g:if test="${queueInstance?.additionalInformation}">
+        <li class="fieldcontain">
+            <span id="additionalInformation-label" class="property-label"><g:message code="additionalInformation.description" default="Additional Information" /></span>
+
+            <span class="property-value" aria-labelledby="purpose-label"><textarea disabled="true" rows="5" cols="40"/><g:fieldValue bean="${queueInstance}" field="additionalInformation"/></textarea></span>
+
+        </li>
+    </g:if>
+    <g:else>
+        <li class="fieldcontain">
+            <span id="purpose-label" class="property-label">Additional Information</span>
 
             <span class="property-value" aria-labelledby="purpose-label"></span>
 

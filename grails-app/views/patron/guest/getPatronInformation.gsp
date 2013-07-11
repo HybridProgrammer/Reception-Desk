@@ -30,6 +30,11 @@
             </div>
 
             <div class="fieldcontain required">
+                <label>Email (FAU): <span class="required-indicator">*</span></label>
+            <g:textField name="email" value="${myValue}" /></label>
+            </div>
+
+            <div class="fieldcontain required">
                 <label><span class="required-indicator">*</span></label>
                 <g:select name="majorId"
                           from="${major.toList()}"
@@ -37,6 +42,11 @@
                           optionValue="displayName"
                           noSelection="['':'-Choose Your Major']"
                 />
+            </div>
+
+            <div class="fieldcontain">
+                <label>Additional Information: </label>
+                <g:textArea name="additionalInformation" value="${myValue}" rows="5" cols="40"/>
             </div>
 
         </fieldset>
