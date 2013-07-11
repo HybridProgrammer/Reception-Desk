@@ -33,15 +33,57 @@ class BootStrap {
 		log.info "Created user admin/admin."
 
 
-        def testUser = User.findByUsername('test') ?: new User(
-                username: 'test',
-                //password: springSecurityService.encodePassword('admin'),
-                password: 'test',
-                enabled: true).save(failOnError: true)
-
-        if (!adminUser.authorities.contains(adminRole)) {
-            UserRole.create testUser, userRole
+        def user = User.findByUsername('tmcendar') ?: new User(username: 'tmcendar', password: 'tmcendar', enabled: true, room: 'Front Desk').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
         }
+        user = User.findByUsername('tkung') ?: new User(username: 'tkung', password: 'tkung', enabled: true, room: '102A').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('mtperez') ?: new User(username: 'mtperez', password: 'mtperez', enabled: true, room: '102C').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('tsorgente') ?: new User(username: 'tsorgente', password: 'tsorgente', enabled: true, room: '102F').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('woodworth') ?: new User(username: 'woodworth', password: 'woodworth', enabled: true, room: '102F').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('lbullard') ?: new User(username: 'lbullard', password: 'lbullard', enabled: true, room: '102H').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('vpeterso') ?: new User(username: 'vpeterso', password: 'vpeterso', enabled: true, room: '102K').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('jlewis92') ?: new User(username: 'jlewis92', password: 'jlewis92', enabled: true, room: '102N').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('dmejia1') ?: new User(username: 'dmejia1', password: 'dmejia1', enabled: true, room: '102P').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('edmunds') ?: new User(username: 'edmunds', password: 'edmunds', enabled: true, room: '102Q').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('ctrepeck') ?: new User(username: 'ctrepeck', password: 'ctrepeck', enabled: true, room: 'Cubicle 1').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('tkung') ?: new User(username: 'mminan', password: 'mminan', enabled: true, room: 'Cubicle 2').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+
+
+
 
         log.info "Created user test/test."
 		
@@ -61,7 +103,13 @@ class BootStrap {
 		Function.findByName('other') ?: new Function(name: 'other', description: 'Other').save(failOnError: true)
 		
 		
-		
+		Major.findByDisplayName('Civil Engineering') ?: new Major(displayName: 'Civil Engineering', shortName: 'CIV', department: 'CEGE').save(failOnError: true)
+        Major.findByDisplayName('Geomatics Engineering') ?: new Major(displayName: 'Geomatics Engineering', shortName: 'GEO', department: 'CEGE').save(failOnError: true)
+        Major.findByDisplayName('Computer Science') ?: new Major(displayName: 'Computer Science', shortName: 'CS', department: 'CEECS').save(failOnError: true)
+        Major.findByDisplayName('Computer Engineering') ?: new Major(displayName: 'Computer Engineering', shortName: 'CE', department: 'CEECS').save(failOnError: true)
+        Major.findByDisplayName('Ocean Engineering') ?: new Major(displayName: 'Ocean Engineering', shortName: 'OC', department: 'OME').save(failOnError: true)
+        Major.findByDisplayName('Mechanical Engineering') ?: new Major(displayName: 'Mechanical Engineering', shortName: 'ME', department: 'OME').save(failOnError: true)
+        Major.findByDisplayName('Electrical Engineering') ?: new Major(displayName: 'Electrical Engineering', shortName: 'EE', department: 'CEECS').save(failOnError: true)
 		
 		//Init can only be called once
 		Stats statInit = Stats.find { name == 'init' }
