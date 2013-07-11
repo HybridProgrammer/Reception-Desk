@@ -104,10 +104,11 @@ class PatronController {
                 //notify the browser of a new patron
                 def jsonQueue = queueInstance as JSON
                 jmsService.send(queue:'msg.enqueue', jsonQueue.toString())
-				
+
+                [queueInstance: queueInstance]
 				//long DAY_IN_MS = 1000 * 60 * 60 * 24;
 				//queueInstance.setDateCreated(new Date(System.currentTimeMillis() - (7 * DAY_IN_MS)))
-			}.to "enterWaitQueue"
+			}.to "showCallNumber"
 			on("cancel").to "askPurpose"
 		}
 //		savePatronInformation {
@@ -116,11 +117,9 @@ class PatronController {
 //			}
 //			on("success").to "enterWaitQueue"
 //		}
-		enterWaitQueue {
-			action {
-				log.info "Entering Wait Queue"	
-			}
+		showCallNumber {
 			on("success").to "askPurpose"
+            on("return").to "askPurpose"
 		}
 		displayPersons {
 			redirect(controller: "Person", action: "index")
