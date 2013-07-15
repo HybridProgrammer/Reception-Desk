@@ -20,6 +20,9 @@ import grails.plugins.springsecurity.Secured;
 import grails.plugins.springsecurity.SecurityConfigType
 
 class TestingController {
+    /**
+     * Dependency injection for the springSecurityService.
+     */
 	def springSecurityService
 	
     def index() {

@@ -22,8 +22,10 @@ import grails.plugins.springsecurity.Secured
 import java.util.Date
 
 class QueueController {
-    //static scaffold = true;
 
+    /**
+     * Dependency injection for the JMS.
+     */
 	def jmsService
 
     /**

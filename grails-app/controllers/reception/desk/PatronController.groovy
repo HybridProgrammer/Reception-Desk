@@ -20,7 +20,15 @@ import javax.persistence.OneToMany;
 import grails.converters.JSON
 
 class PatronController {
+
+    /**
+     * Dependency injection for the springSecurityService.
+     */
 	def springSecurityService
+
+    /**
+     * Dependency injection for the JMS.
+     */
     def jmsService
 	
 
