@@ -40,6 +40,7 @@
                 <g:textField name="name" value="${myValue}" /></label>
             </div>
 
+            <!-- need to include help text issue #2 -->
             <div class="fieldcontain required">
                 <label>Z Number: <span class="required-indicator">*</span></label>
                 <g:textField name="zNumber" value="${myValue}" /></label>
