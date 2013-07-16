@@ -86,6 +86,7 @@
 
                     </select>
                 </li>
+                <li><g:link class="room" controller="User" action="room"><g:message code="default.room.label" default="Change Room"/></g:link></li>
 			</ul>
 		</div>
 		<div id="list-queue" class="content scaffold-list" role="main">

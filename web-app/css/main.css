@@ -201,7 +201,7 @@ img {
 	text-decoration: underline;
 }
 
-.nav a.home, .nav a.list, .nav a.create, .nav a.all {
+.nav a.home, .nav a.list, .nav a.create, .nav a.all, .nav a.room {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
@@ -221,6 +221,10 @@ img {
 
 .nav a.all {
     background-image: url(../images/skin/database_table.png);
+}
+
+.nav a.room {
+    background-image: url(../images/icons/door.png);
 }
 
 .nav a.create {
