@@ -37,6 +37,9 @@
         .input-prepend input {
             width: 180px;
         }
+        .tooltip-inner {
+            max-width: 350px;
+        }
     </style>
 </head>
 <body>
