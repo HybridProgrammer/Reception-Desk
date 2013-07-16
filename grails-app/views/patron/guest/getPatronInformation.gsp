@@ -23,6 +23,13 @@
     <title><g:message code="default.list.label" args="[entityName]" /></title>
     <g:javascript library="jquery" />
     <r:require module="jquery-ui"/>
+    <script>
+        $(function() {
+            $( document ).tooltip({
+                track: true
+            });
+        });
+    </script>
 </head>
 <body>
 <a href="#list-function" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -43,7 +50,7 @@
             <!-- need to include help text issue #2 -->
             <div class="fieldcontain required">
                 <label>Z Number: <span class="required-indicator">*</span></label>
-                <g:textField name="zNumber" value="${myValue}" /></label>
+                <g:textField name="zNumber" value="${myValue}" title="Z# can be looked up by signing into MyFAU: (http://my.fau.edu)" /></label>
             </div>
 
             <div class="fieldcontain required">
