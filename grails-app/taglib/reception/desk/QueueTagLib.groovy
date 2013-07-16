@@ -60,4 +60,16 @@ class QueueTagLib {
         out << body() << text;
     }
 
+    /**
+     * return the major based on queueInstance
+     */
+    def major = { attrs, body ->
+        Queue queueInstance = attrs.queueInstance
+        Person p = queueInstance.person
+        Major major = Major.get(p.majorId)
+
+
+        out << body() << major.shortName;
+    }
+
 }

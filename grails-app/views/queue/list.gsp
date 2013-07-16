@@ -107,6 +107,8 @@
 						<g:sortableColumn property="name" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
 						
 						<g:sortableColumn property="purpose" title="${message(code: 'queue.purpose.name.label', default: 'Purpose')}" />
+
+                        <g:sortableColumn property="major" title="${message(code: 'queue.major.name.label', default: 'Major')}" />
 						
 						<g:sortableColumn property="workingWith" title="${message(code: 'queue.dateCreated.label', default: 'Working With')}" />
 					
@@ -131,6 +133,8 @@
 						<td>${fieldValue(bean: queueInstance, field: "person.name")}</td>
 						
 						<td>${fieldValue(bean: queueInstance, field: "purpose.description")}</td>
+
+                        <td><g:major queueInstance="${queueInstance}"></g:major></td>
 
                         <td><g:workingWith queueInstance="${queueInstance}"></g:workingWith></td>
 					
