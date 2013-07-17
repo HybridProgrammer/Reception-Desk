@@ -23,6 +23,24 @@
     <title><g:message code="default.list.label" args="[entityName]" /></title>
     <g:javascript library="jquery" />
     <r:require module="jquery-ui"/>
+    <script src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
+
+    <script>
+        $(document).ready(function() {
+            var toolTipOptions = {animation: true, placement: 'right'};
+
+            $('#znumber').tooltip(toolTipOptions);
+        });
+    </script>
+
+    <style>
+        .input-prepend input {
+            width: 180px;
+        }
+        .tooltip-inner {
+            max-width: 350px;
+        }
+    </style>
 </head>
 <body>
 <a href="#list-function" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -37,17 +55,24 @@
         <fieldset class="form">
             <div class="fieldcontain required">
                 <label>Name:  <span class="required-indicator">*</span></label>
-                <g:textField name="name" value="${myValue}" /></label>
+                <g:textField name="name" value="${myValue}" />
             </div>
 
+            <!-- need to include help text issue #2 -->
             <div class="fieldcontain required">
                 <label>Z Number: <span class="required-indicator">*</span></label>
-                <g:textField name="zNumber" value="${myValue}" /></label>
+            <div class="input-prepend">
+                <span class="add-on">Z</span>
+                <g:textField id="znumber" name="zNumber" value="${myValue}" title="Z# can be looked up by signing into MyFAU: (http://my.fau.edu)" />
+                    </div>
             </div>
 
             <div class="fieldcontain required">
                 <label>Email (FAU): <span class="required-indicator">*</span></label>
-            <g:textField name="email" value="${myValue}" /></label>
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-envelope"></i> </span>
+                    <g:textField name="email" value="${myValue}" />
+                </div>
             </div>
 
             <div class="fieldcontain required">

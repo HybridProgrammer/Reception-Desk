@@ -17,7 +17,7 @@
   -    limitations under the License.
   --}%
 
-<g:if test="${queueInstance?.callNumber}">
+    <g:if test="${queueInstance?.callNumber}">
         <li class="fieldcontain">
             <span id="callNumber-label" class="property-label"><g:message code="callNumber" default="Call Number" /></span>
 

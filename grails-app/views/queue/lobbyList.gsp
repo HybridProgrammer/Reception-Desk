@@ -328,7 +328,34 @@
                     callPatron(calledPatron);
                 </g:if>
             </g:each>
+
+
+
+            var j;
+            $(document).mousemove(function() {
+                if (!justHidden) {
+                    console.log('move');
+                    clearTimeout(j);
+                    $('html').css({cursor: 'default'});
+                    j = setTimeout('hide();', 1000);
+                }
+            });
+
+            //On first load we want to hide it
+            $('html').css({cursor: 'none'});
+
+
         });
+
+        var justHidden = false;
+
+        function hide() {
+            $('html').css({cursor: 'none'});
+            justHidden = true;
+            setTimeout(function() {
+                justHidden = false;
+            }, 500);
+        }
         </script>
 	</head>
 	<body>

@@ -31,7 +31,7 @@
 		<g:message code="user.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" required="" value="${userInstance?.password}"/>
+	<g:passwordField name="password" required="" value="${userInstance?.password}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'room', 'error')} ">

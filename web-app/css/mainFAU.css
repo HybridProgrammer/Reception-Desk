@@ -240,6 +240,10 @@ img {
     background-image: url(../images/skin/database_table.png);
 }
 
+.nav a.room {
+    background-image: url(../images/icon/door.png);
+}
+
 .nav a.create {
 	background-image: url(../images/skin/database_add.png);
 }
