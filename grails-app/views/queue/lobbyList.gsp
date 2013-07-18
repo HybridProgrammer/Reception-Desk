@@ -54,9 +54,7 @@
                     if (response.status == 200) {
                         console.log(response.responseBody);
                         var data = response.responseBody;
-                        //data = data.substr(data.indexOf('<script>'), data.length-data.indexOf('<script>')) /* strip comment buffer from Atmosphere */
-                        //data = data.substr(data.indexOf('<script>parent.callback(\'')+'<script>parent.callback(\''.length, data.length-(data.indexOf('<script>')+'<script>parent.callback(\''.length))
-                        //data = data.substr(0, data.length-(data.indexOf('<\script>')+13))
+
                         if (data.length > 0) {
                             try {
                                 var msgObj = jQuery.parseJSON(data);
