@@ -82,7 +82,7 @@ class QueueController {
         }
 
 
-		render(view: "list", model: [queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count(), userInstance: userInstance])
+		render(view: "listAll", model: [queueInstanceList: Queue.list(params), queueInstanceTotal: Queue.count(), userInstance: userInstance])
 	}
 
     @Secured(['IS_AUTHENTICATED_FULLY'])

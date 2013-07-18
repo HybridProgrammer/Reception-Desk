@@ -15,6 +15,8 @@
   -    limitations under the License.
   --}%
 
+
+
 <%@ page import="reception.desk.Queue" %>
 <!DOCTYPE html>
 <html>
@@ -104,7 +106,7 @@
 					
 						<g:sortableColumn property="callNumber" title="${message(code: 'queue.callNumber.label', default: '#')}" />
 											
-						<g:sortableColumn property="dateCreated" title="${message(code: 'queue.dateCreated.label', default: 'Wait Time')}" />
+						<g:sortableColumn property="dateCreated" title="${message(code: 'queue.dateCreated.label', default: 'dateCreated')}" />
 					
 						<g:sortableColumn property="name" title="${message(code: 'queue.person.name.label', default: 'Name')}" />
 						
@@ -130,7 +132,7 @@
 						
 						<td>${fieldValue(bean: queueInstance, field: "callNumber")}</td>
 					
-						<td><g:waitTime queueInstance="${queueInstance}"></g:waitTime></td>
+						<td>${fieldValue(bean: queueInstance, field: "dateCreated")}</td>
 					
 						<td>${fieldValue(bean: queueInstance, field: "person.name")}</td>
 						
