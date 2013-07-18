@@ -37,8 +37,8 @@
 
         <script type="text/javascript">
         var socket = {}
-        var nMessages = 0; //When this equals 30 we refresh the webpage
-        var maxMessages = 30;
+        var nMessages = 0; //When this equals 700 we refresh the webpage
+        var maxMessages = 700;
         var isRefreshing = false;
         var timeDelay = 180000; //3 minutes = 180000 milliseconds
         var msgDelay = 60000; //1 minute = 60000 milliseconds
@@ -169,7 +169,6 @@
                                 });
                             }
 
-
                         }
 
                         window.clearTimeout(removePatronTimerArr[queueInstance.id])
@@ -298,7 +297,7 @@
                 var location = '${createLink(uri: '/atmosphere/messages', absolute: "true")}';   //'http://localhost:8080/reception-desk/atmosphere/messages';
                 socket = $.atmosphere;
                 //$.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
-                socket.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'websocket'});
+                socket.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'websocket', maxRequest: 750});
             //var socket = $.atmosphere;
             //var request = { url: location,
             //                contentType : "application/json",
