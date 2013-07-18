@@ -126,6 +126,7 @@ class BootStrap {
         Major.findByDisplayName('Ocean Engineering') ?: new Major(displayName: 'Ocean Engineering', shortName: 'OC', department: 'OME').save(failOnError: true)
         Major.findByDisplayName('Mechanical Engineering') ?: new Major(displayName: 'Mechanical Engineering', shortName: 'ME', department: 'OME').save(failOnError: true)
         Major.findByDisplayName('Electrical Engineering') ?: new Major(displayName: 'Electrical Engineering', shortName: 'EE', department: 'CEECS').save(failOnError: true)
+        Major.findByDisplayName('Other') ?: new Major(displayName: 'Other', shortName: 'Other', department: 'Other').save(failOnError: true)
 		
 		//Init can only be called once
 		Stats statInit = Stats.find { name == 'init' }
