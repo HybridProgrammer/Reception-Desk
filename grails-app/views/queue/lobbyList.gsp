@@ -37,8 +37,8 @@
 
         <script type="text/javascript">
         var socket = {}
-        var nMessages = 0; //When this equals 30 we refresh the webpage
-        var maxMessages = 30;
+        var nMessages = 0; //When this equals 700 we refresh the webpage
+        var maxMessages = 700;
         var isRefreshing = false;
         var timeDelay = 180000; //3 minutes = 180000 milliseconds
         var msgDelay = 60000; //1 minute = 60000 milliseconds
@@ -80,7 +80,7 @@
                                 console.log(e);
                             }
                             fixRowHighlighting()
-                            //nMessages = nMessages + 1;
+                            nMessages = nMessages + 1;
                             if(nMessages > maxMessages && !isRefreshing)   {
                                 window.location.reload(true);
                                 isRefreshing = true;
