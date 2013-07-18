@@ -79,6 +79,7 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        //grails.app.context="/"
 		
 		
     }
@@ -130,6 +131,6 @@ grails.plugins.springsecurity.interceptUrlMap = [
 
 
 // Autorun Database Migrations
-grails.plugin.databasemigration.updateOnStart = true
+//grails.plugin.databasemigration.updateOnStart = true
 grails.plugin.databasemigration.updateOnStartFileNames = ['2013-07-08-initial.groovy']
 

@@ -80,7 +80,7 @@
                                 console.log(e);
                             }
                             fixRowHighlighting()
-                            nMessages = nMessages + 1;
+                            //nMessages = nMessages + 1;
                             if(nMessages > maxMessages && !isRefreshing)   {
                                 window.location.reload(true);
                                 isRefreshing = true;
@@ -297,7 +297,7 @@
                 var location = '${createLink(uri: '/atmosphere/messages', absolute: "true")}';   //'http://localhost:8080/reception-desk/atmosphere/messages';
                 socket = $.atmosphere;
                 //$.atmosphere.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'long-polling'});
-                socket.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'websocket'});
+                socket.subscribe(location, callback, $.atmosphere.request = {transport: 'websocket', fallbackTransport: 'websocket', maxRequest: 750});
             //var socket = $.atmosphere;
             //var request = { url: location,
             //                contentType : "application/json",
