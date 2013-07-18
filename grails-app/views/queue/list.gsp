@@ -87,6 +87,7 @@
                     </select>
                 </li>
                 <li><g:link class="room" controller="User" action="room"><g:message code="default.room.label" default="Change Room"/></g:link></li>
+                <li><g:link class="logout" controller="Logout" action="index"><g:message code="default.logout.label" default="Log Out"/></g:link></li>
 			</ul>
 		</div>
 		<div id="list-queue" class="content scaffold-list" role="main">

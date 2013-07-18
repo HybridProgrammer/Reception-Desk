@@ -30,6 +30,7 @@
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
                 <li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
                 <li><g:link class="all" action="listAllDay"><g:message code="default.all.label" default="Show All"/></g:link></li>
+                <li><g:link class="logout" controller="Logout" action="index"><g:message code="default.logout.label" default="Log Out"/></g:link></li>
 			</ul>
 		</div>
 		<div id="show-queue" class="content scaffold-show" role="main">
