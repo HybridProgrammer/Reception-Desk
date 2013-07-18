@@ -157,12 +157,18 @@
                         }
                         else { //Row doesn't exist. We need to now reinsert it into the proper location
                             row = '<tr name="' + queueInstance.id + '">' + row + '</tr>';
-                            $('tbody tr').each(function(index){
-                                if(parseInt($(this).attr("name")) > queueInstance.id) {  //We should insert above this row
-                                    var parent = $(this).before(row);
-                                    return false;
-                                }
-                            });
+                            if($('tbody tr')[0] == undefined ) {     //check to see if we have any elements in the table.
+                                $('tbody').append(row);
+                            }
+                            else {
+                                $('tbody tr').each(function(index){
+                                    if(parseInt($(this).attr("name")) > queueInstance.id) {  //We should insert above this row
+                                        var parent = $(this).before(row);
+                                        return false;
+                                    }
+                                });
+                            }
+
 
                         }
 
