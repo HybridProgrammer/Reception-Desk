@@ -98,10 +98,6 @@ class BootStrap {
             UserRole.create user, userRole
         }
 
-
-
-
-        log.info "Created user test/test."
 		
 		//Load functions
 		Function.findByName('advising') ?: new Function(name: 'advising', description: 'Advising for semester classes').save(failOnError: true)
@@ -127,6 +123,14 @@ class BootStrap {
         Major.findByDisplayName('Mechanical Engineering') ?: new Major(displayName: 'Mechanical Engineering', shortName: 'ME', department: 'OME').save(failOnError: true)
         Major.findByDisplayName('Electrical Engineering') ?: new Major(displayName: 'Electrical Engineering', shortName: 'EE', department: 'CEECS').save(failOnError: true)
         Major.findByDisplayName('Other') ?: new Major(displayName: 'Other', shortName: 'Other', department: 'Other').save(failOnError: true)
+
+        //Fix for issue #26 - switch OC to OE
+        def update = Major.findByShortName("OC")
+        if(update != null) {
+            update.setShortName("OE")
+            update.save(failOnError: true)
+        }
+
 		
 		//Init can only be called once
 		Stats statInit = Stats.find { name == 'init' }
