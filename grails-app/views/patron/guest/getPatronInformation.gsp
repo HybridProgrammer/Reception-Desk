@@ -67,7 +67,7 @@
                 <label>Z Number: (<a href="https://banner.fau.edu/FAUPdad/lwgkznum.P_DisplayID&iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">Lookup</a>) <span class="required-indicator">*</span></label>
             <div class="input-prepend">
                 <span class="add-on">Z</span>
-                <g:textField id="znumber" name="zNumber" value="${myValue}" title="Z# can be looked up by signing into MyFAU: (http://my.fau.edu)" />
+                <g:textField id="znumber" name="zNumber" value="${myValue}" title="Click Lookup to lookup your Z# if you don't know it." />
                     </div>
             </div>
 
