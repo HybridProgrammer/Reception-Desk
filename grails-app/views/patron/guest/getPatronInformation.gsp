@@ -24,12 +24,16 @@
     <g:javascript library="jquery" />
     <r:require module="jquery-ui"/>
     <script src="${resource(dir: 'js', file: 'bootstrap.js')}"></script>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'prettyPhoto.css')}" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" >
+    <script src="${resource(dir: 'js', file: 'jquery.prettyPhoto.js')}" type="text/javascript" charset="utf-8"></script>
 
     <script>
         $(document).ready(function() {
             var toolTipOptions = {animation: true, placement: 'right'};
 
             $('#znumber').tooltip(toolTipOptions);
+
+            $("a[rel^='prettyPhoto']").prettyPhoto();
         });
     </script>
 
@@ -60,7 +64,7 @@
 
             <!-- need to include help text issue #2 -->
             <div class="fieldcontain required">
-                <label>Z Number: <span class="required-indicator">*</span></label>
+                <label>Z Number: (<a href="https://banner.fau.edu/FAUPdad/lwgkznum.P_DisplayID&iframe=true&width=100%&height=100%" rel="prettyPhoto[iframes]">Lookup</a>) <span class="required-indicator">*</span></label>
             <div class="input-prepend">
                 <span class="add-on">Z</span>
                 <g:textField id="znumber" name="zNumber" value="${myValue}" title="Z# can be looked up by signing into MyFAU: (http://my.fau.edu)" />
