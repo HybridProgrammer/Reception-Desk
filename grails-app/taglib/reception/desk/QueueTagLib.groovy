@@ -66,6 +66,11 @@ class QueueTagLib {
     def major = { attrs, body ->
         Queue queueInstance = attrs.queueInstance
         Person p = queueInstance.person
+
+        if(p.majorId == null){
+            out << body() << ""
+            return
+        }
         Major major = Major.get(p.majorId)
 
 
