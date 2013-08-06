@@ -33,6 +33,7 @@ class BootStrap {
         //SpringSecurityUtils.clientRegisterFilter('myAuthEventListener', SecurityFilterPosition.PRE_AUTH_FILTER.order + 10)
 
 		//Stuff that can be run all the time
+        /*
 		def userRole = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(failOnError: true)
 		def adminRole = Role.findByAuthority('ROLE_ADMIN') ?: new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
 
@@ -47,56 +48,19 @@ class BootStrap {
 			}
 
 		log.info "Created user admin/admin."
+        */
 
+        /*
+        def user = User.findByUsername('user1') ?: new User(username: 'user1', password: 'password', enabled: true, room: 'Front Desk').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        user = User.findByUsername('user2') ?: new User(username: 'user2', password: 'password', enabled: true, room: '102A').save(failOnError: true)
+        if (!user.authorities.contains(userRole)) {
+            UserRole.create user, userRole
+        }
+        */
 
-        def user = User.findByUsername('tmcendar') ?: new User(username: 'tmcendar', password: 'tmcendar', enabled: true, room: 'Front Desk').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('tkung') ?: new User(username: 'tkung', password: 'tkung', enabled: true, room: '102A').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('mtperez') ?: new User(username: 'mtperez', password: 'mtperez', enabled: true, room: '102C').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('tsorgente') ?: new User(username: 'tsorgente', password: 'tsorgente', enabled: true, room: '102F').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('woodworth') ?: new User(username: 'woodworth', password: 'woodworth', enabled: true, room: '102F').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('lbullard') ?: new User(username: 'lbullard', password: 'lbullard', enabled: true, room: '102H').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('vpeterso') ?: new User(username: 'vpeterso', password: 'vpeterso', enabled: true, room: '102K').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('jlewis92') ?: new User(username: 'jlewis92', password: 'jlewis92', enabled: true, room: '102N').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('dmejia1') ?: new User(username: 'dmejia1', password: 'dmejia1', enabled: true, room: '102P').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('edmunds') ?: new User(username: 'edmunds', password: 'edmunds', enabled: true, room: '102Q').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('ctrepeck') ?: new User(username: 'ctrepeck', password: 'ctrepeck', enabled: true, room: 'Cubicle 1').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
-        user = User.findByUsername('tkung') ?: new User(username: 'mminan', password: 'mminan', enabled: true, room: 'Cubicle 2').save(failOnError: true)
-        if (!user.authorities.contains(userRole)) {
-            UserRole.create user, userRole
-        }
 
 		
 		//Load functions
