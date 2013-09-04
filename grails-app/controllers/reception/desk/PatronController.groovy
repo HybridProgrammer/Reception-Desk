@@ -93,6 +93,9 @@ class PatronController {
 			on("programs"){
                 [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Dual Enrollment/Summer Programs
+            on("class"){
+                [major: Major.list(sort: 'displayName')]
+            }.to "getPatronInformation"		//Office Hours/Class Questions
 			on("other"){
                 [major: Major.list(sort: 'displayName')]
             }.to "getPatronInformation"		//Other
