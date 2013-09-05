@@ -120,8 +120,8 @@ grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'reception.des
 grails.plugins.springsecurity.authority.className = 'reception.desk.Role'
 grails.plugins.springsecurity.useSecurityEventListener = true
 grails.plugins.springsecurity.successHandler.defaultTargetUrl = '/user/room'
-grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
-grails.plugins.springsecurity.interceptUrlMap = [
+grails.plugins.springsecurity.securityConfigType = "Annotation"
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
         '/function/*':          ['ROLE_ADMIN'],
         '/dbdoc/*':             ['ROLE_ADMIN'],
         '/displayClient/*':     ['ROLE_ADMIN'],
