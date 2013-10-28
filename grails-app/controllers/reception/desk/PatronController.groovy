@@ -30,6 +30,8 @@ class PatronController {
      * Dependency injection for the JMS.
      */
     def jmsService
+
+    def callNumberService
 	
 
     def index() {
@@ -119,7 +121,7 @@ class PatronController {
 				log.info "Count of Person Table: " + list
 				
 				//Add user to wait queue
-				def queueInstance = new Queue(isInLine: true, person: personInstance, purpose: flow.purpose, callNumber: CallNumber.getNext(), additionalInformation: params.additionalInformation)
+				def queueInstance = new Queue(isInLine: true, person: personInstance, purpose: flow.purpose, callNumber: callNumberService.getNext(), additionalInformation: params.additionalInformation)
 				if (!queueInstance.save(flush: true)) {
 					//render(view: "create", model: [personInstance: personInstance])
 					return
