@@ -201,7 +201,7 @@ img {
 	text-decoration: underline;
 }
 
-.nav a.home, .nav a.list, .nav a.create, .nav a.all, .nav a.room, .nav a.logout {
+.nav a.home, .nav a.report, .nav a.list, .nav a.create, .nav a.all, .nav a.room, .nav a.logout {
 	background-position: 0.7em center;
 	background-repeat: no-repeat;
 	text-indent: 25px;
@@ -209,6 +209,10 @@ img {
 
 .nav a.home {
 	background-image: url(../images/skin/house.png);
+}
+
+.nav a.report {
+    background-image: url(../images/icons/page_excel.png);
 }
 
 .nav a.call {
