@@ -62,7 +62,7 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
-        // runtime 'mysql:mysql-connector-java:5.1.22'
+        runtime 'mysql:mysql-connector-java:5.1.22'
 		compile "org.grails:grails-webflow:$grailsVersion"
 		
 		compile('org.apache.activemq:activemq-core:5.3.0',
