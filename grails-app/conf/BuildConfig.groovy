@@ -35,6 +35,8 @@ grails.project.dependency.resolution = {
     inherits("global") {
         // specify dependency exclusions here; for example, uncomment this to disable ehcache:
         // excludes 'ehcache'
+
+        excludes 'xercesImpl'   //#1 important thing
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
@@ -109,5 +111,7 @@ grails.project.dependency.resolution = {
 		compile ":atmosphere:0.4.2.1"
 		compile ":activemq:0.4.1"
 		compile ":jms:1.2"
+
+        compile ":excel-export:0.1.6"
     }
 }

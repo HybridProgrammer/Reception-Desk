@@ -18,6 +18,11 @@ package reception.desk
 
 import grails.converters.JSON
 import grails.plugins.springsecurity.Secured
+import pl.touk.excel.export.WebXlsxExporter
+import org.springframework.context.MessageSource
+import pl.touk.excel.export.XlsxExporter
+import pl.touk.excel.export.getters.LongToDatePropertyGetter
+import pl.touk.excel.export.getters.MessageFromPropertyGetter
 
 import java.util.Date
 
@@ -301,5 +306,21 @@ class QueueController {
         }
 
         [queueInstance: queueInstance, personInstance: personInstance, major: Major.get(personInstance.majorId)]
+    }
+
+    @Secured(['IS_AUTHENTICATED_FULLY'])
+    def report(Integer max) {
+
+        def withProperties = ['dateCreated', 'lastUpdated', 'timeCalled', 'isInLine', 'callNumber', 'goToRoom', 'additionalInformation', 'owner.username', 'person.name', 'person.zNumber', 'person.email', 'person.majorId', 'purpose.description']
+        def headers = withProperties
+        //params.max = Math.min(max ?: 10, Queue.count())
+
+        new WebXlsxExporter().with {
+            setResponseHeaders(response)
+            fillHeader(headers)
+            add(Queue.findAll().toList(), withProperties)
+            save(response.outputStream)
+        }
+
     }
 }

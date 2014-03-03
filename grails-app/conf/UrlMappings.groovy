@@ -23,7 +23,8 @@ class UrlMappings {
 			}
 		}
 
-		"/"(controller: 'queue', action: 'list')
+		//"/"(controller: 'queue', action: 'list')
+        "/"(view: 'index')
 		"500"(view:'/error')
 		
 		"/login/$action?"(controller: "login")
