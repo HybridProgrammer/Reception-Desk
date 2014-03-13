@@ -26,7 +26,15 @@ class QueueTagLib {
 	def waitTime = { attrs, body ->
 		Queue queueInstance = attrs.queueInstance
 		Calendar c1 = queueInstance.dateCreated.toCalendar();
-		Calendar c2 = Calendar.getInstance();
+
+        Calendar c2;
+        if(queueInstance.getTimeCalled() == null || queueInstance.getTimeCalled() == "") {
+            c2 = Calendar.getInstance();
+        }
+        else {
+            c2 = queueInstance.getTimeCalled().toCalendar();
+        }
+
 		
 		Long minutes = (c2.getTimeInMillis() - c1.getTimeInMillis()) / 60000;
 		Long waitInHours = minutes / 60;
