@@ -61,6 +61,25 @@ class BootStrap {
         }
         */
 
+        def reporterRole = Role.findByAuthority('ROLE_REPORTER') ?: new Role(authority: 'ROLE_REPORTER').save(failOnError: true)
+        def adminUser = User.findByUsername('admin')
+
+
+        if (!adminUser.authorities.contains(reporterRole)) {
+            UserRole.create adminUser, reporterRole
+        }
+
+
+        def user = User.findByUsername('lbullard')
+        if (!user.authorities.contains(reporterRole)) {
+            UserRole.create user, reporterRole
+        }
+
+        user = User.findByUsername('jbrynes')
+        if (!user.authorities.contains(reporterRole)) {
+            UserRole.create user, reporterRole
+        }
+
 
 		
 		//Load functions

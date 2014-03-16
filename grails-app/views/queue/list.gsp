@@ -86,7 +86,9 @@
 
                     </select>
                 </li>
+                <sec:ifAnyGranted roles="ROLE_REPORTER">
                 <li><g:link class="report" controller="Queue" action="report"><g:message code="default.list.report" default="Report" /></g:link></li>
+                </sec:ifAnyGranted>
                 <li><g:link class="room" controller="User" action="room"><g:message code="default.room.label" default="Change Room"/></g:link></li>
                 <li><g:link class="logout" controller="Logout" action="index"><g:message code="default.logout.label" default="Log Out"/></g:link></li>
 			</ul>
