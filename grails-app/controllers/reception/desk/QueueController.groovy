@@ -308,7 +308,7 @@ class QueueController {
         [queueInstance: queueInstance, personInstance: personInstance, major: Major.get(personInstance.majorId)]
     }
 
-    @Secured(['IS_AUTHENTICATED_FULLY'])
+    @Secured(['ROLE_REPORTER'])
     def report(Integer max) {
 
         def withProperties = ['dateCreated', 'lastUpdated', 'timeCalled', 'isInLine', 'callNumber', 'goToRoom', 'additionalInformation', 'owner.username', 'person.name', 'person.zNumber', 'person.email', 'person.majorId', 'purpose.description']
