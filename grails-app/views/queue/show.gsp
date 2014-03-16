@@ -22,6 +22,24 @@
 		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'queue.label', default: 'Queue')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
+        <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery.flipcountdown.css')}" type="text/css">
+        <g:javascript library="jquery" />
+        <g:javascript src="jquery.flipcountdown.js" />
+        <script type="text/javascript">
+        $(document).ready(function() {
+            var time = new Date('5.10.2012 00:00:00');
+            $("#flipcounter").flipcountdown({
+                tzoneOffset:3,
+                showSecond:true,
+                showHour: false,
+                tick:function(){
+                    time = time.setTime(time.getDate() + 1/86400);
+                    return time;
+                }
+            });
+        });
+
+        </script>
 	</head>
 	<body>
 		<a href="#show-queue" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -39,6 +57,7 @@
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
+            <div id="flipcounter" style="visibility: hidden; float: right"></div>
             <g:render template="showProperties"/>
 			<g:form>
 				<fieldset class="buttons">
@@ -52,6 +71,8 @@
                     </g:else>
 				</fieldset>
 			</g:form>
+
 		</div>
+
 	</body>
 </html>
